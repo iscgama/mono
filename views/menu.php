@@ -194,25 +194,8 @@
 
 
 
-$salida .= '
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="madmon" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa-duotone fa-chart-column"></i> Reportes
-                </a>
-                <div class="dropdown-menu" aria-labelledby="madmon">';
 
-                // $salida .= ($cajas_r) ? '<a class="dropdown-item" id="mrptvta"><i class="fa-duotone fa-coins"></i>  Ventas</a>' : '';
-                $salida .= ($cajas_r) ? '<a class="dropdown-item" id="mrptinv"><i class="fa-solid fa-chart-pie"></i>  Inventario</a>' : '';
-                $salida .= ($cajas_r) ? '<a class="dropdown-item" id="mrptcte"><i class="fa-duotone fa-users"></i>  Clientes</a>' : '';
-                $salida .= ($cajas_r) ? '<a class="dropdown-item" id="mrptcomp"><i class="fa-solid fa-bags-shopping"></i>   Compras</a>' : '';
-                $salida .= ($cajas_r) ? '<a class="dropdown-item" id="mrptsal"><i class="fa-duotone fa-cart-shopping"></i>   Salidas</a>' : '';
-                $salida .= ($cajas_r) ? '<a class="dropdown-item" id="mrpttras"><i class="fa-solid fa-box-check"></i>   Traspasos</a>' : '';
-                $salida .= ($cajas_r) ? '<a class="dropdown-item" id="mrptped"><i class="fa-solid fa-paper-plane"></i> Pedidos</a>' : '';
-                
-
-    $salida .= '            </div>
-            </li>
+    $salida .= '            
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="mseguridad" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa-duotone fa-gears"></i> Sistema
