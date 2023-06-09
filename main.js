@@ -900,13 +900,11 @@ const eliminar_compra = ( id ) => {
 }
 
 const finalizar_compra = ( id ) => {
-    var sucursal = localStorage.getItem('sucursal');
-    var usuario = localStorage.getItem('idu');
+    let usuario = localStorage.getItem('idu');
     $.ajax({
         type: 'POST',
         url: 'php/finalizarcompra.php',
-        data: 'id=' + id + '&sucursal=' + sucursal
-                + '&usuario=' + usuario,
+        data: 'id=' + id + '&usuario=' + usuario,
         success: ( res ) => {
             if (res == 1) {
                 mensajes('Compra realizada con éxito');

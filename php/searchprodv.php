@@ -7,13 +7,11 @@
 
 
 
-    $sql = "SELECT a.id_a, a.cod_a, a.desc_a, e.exist_e, a.precio_a, m.desc_m
-            FROM existsuc e
-            INNER JOIN articulos a ON a.id_a = e.id_a
+    $sql = "SELECT a.id_a, a.cod_a, a.desc_a, a.egral_a, a.precio_a, m.desc_m
+            FROM articulos a
             INNER JOIN marcas m ON a.id_m = m.id_m 
             WHERE (a.cod_a LIKE '%" . $criterio . "%'
-                OR a.desc_a LIKE '%" . $criterio . "%')
-                AND e.id_s = " . $sucursal;
+                OR a.desc_a LIKE '%" . $criterio . "%')";
             
 
 
@@ -37,7 +35,7 @@
         $salida .= '<tr>';
 		$salida .= '
 					<td>' . $a['desc_a'] . ' '. $a['desc_m'] . '</td>
-					<td>' . $a['exist_e'] . '</td>
+					<td>' . $a['egral_a'] . '</td>
 					<td>$' . number_format($a['precio_a'], 2) . '</td>
                     ';
                     

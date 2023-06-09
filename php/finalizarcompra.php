@@ -4,7 +4,6 @@
     require_once 'conexion.php';
 
     $id = $_POST['id'];
-    $sucursal = $_POST['sucursal'];
     $usuario = $_POST['usuario'];
 
     //Obtenemos toda la información de la compra actual
@@ -15,7 +14,7 @@
     
     //Por cada renglon afectamos el inventario
     foreach ($res as $a) {
-        $sql2 = "SELECT exist_e, id_a FROM existsuc WHERE id_a = " . $a['id_a'];
+        $sql2 = "SELECT egral_a, id_a FROM articulos WHERE id_a = " . $a['id_a'];
         $res2 = $con->query($sql2);
         $res2->execute();
         
@@ -28,34 +27,21 @@
         $ida = 0;
 
         foreach ($res2 as $a2) {
-            $actual = $a2['exist_e'];
+            $actual = $a2['egral_a'];
             $ida = $a2['id_a'];
         }
 
-        if ($ida == 0) {
-            $sql3 = "INSERT INTO existsuc (id_s, id_a, exist_e, id_u) 
-                            VALUES(:sucursal, :ida, :exist, :usuario)";
         
-                
-            $statement = $con->prepare($sql3);
-            $statement->bindParam(':sucursal', $sucursal);
-            $statement->bindParam(':ida', $a['id_a']);
-            $statement->bindParam(':exist', $existcompra);
-            $statement->bindParam(':usuario', $usuario);
+        $exist = $existcompra + $actual;
 
-            $statement->execute();
-        }else {
-            $exist = $existcompra + $actual;
+        $sql3 = "UPDATE articulos SET egral_a = :exist WHERE id_a = :ida";
+    
+            
+        $statement = $con->prepare($sql3);
+        $statement->bindParam(':exist', $exist);
+        $statement->bindParam(':ida', $a['id_a']);
 
-            $sql3 = "UPDATE existsuc SET exist_e = :exist WHERE id_a = :ida";
-        
-                
-            $statement = $con->prepare($sql3);
-            $statement->bindParam(':exist', $exist);
-            $statement->bindParam(':ida', $a['id_a']);
-
-            $statement->execute();
-        }
+        $statement->execute();
 
 
         //Afectamos el costo de cada producto
