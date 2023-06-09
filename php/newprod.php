@@ -77,43 +77,7 @@
         }
     }
 
-function Reg_Sucursal ( $codigo, $desc, $con ) {
-    $sql = "SELECT id_a FROM articulos WHERE cod_a = '" . $codigo . "' AND desc_a = '" . $desc . "'";
-    $res = $con->query( $sql );
-    $res->execute();
 
-
-    if ($res->rowCount() > 0) {
-
-        $idp = '';
-
-        foreach ($res as $a) {
-            $idp = $a['id_a'];
-        }
-    }
-
-    $sql = "SELECT id_s FROM sucursales";
-    $res = $con->query( $sql );
-    $res->execute();
-
-    foreach ($res as $a) {
-        $sucursal = $a['id_s'];
-        $sql2 = "SELECT id_a FROM existsuc WHERE id_a = " . $idp . " AND id_s = " . $sucursal;
-        $res2 = $con->query( $sql2 );
-        $res2->execute();
-
-        if ($res2->rowCount() == 0) {
-            $sql = "INSERT INTO `existsuc`(`id_s`, `id_a`, `exist_e`, `id_u`) 
-            VALUES (:sucursal, :idp, 0, 1);";
-
-            $statement = $con->prepare($sql);
-            $statement->bindParam(':sucursal', $sucursal);
-            $statement->bindParam(':idp', $idp);
-            
-            $statement->execute();
-        }
-    }
-}
 
 
     $operacion = $_POST['operacion'];
@@ -217,7 +181,6 @@ function Reg_Sucursal ( $codigo, $desc, $con ) {
 
             $statement->execute();
 
-            Reg_Sucursal( $codigo, $desc, $con );
         }else {
             echo 'Ese producto ya existe con el codigo o descripción que deseas registrar';
         }
@@ -271,7 +234,6 @@ function Reg_Sucursal ( $codigo, $desc, $con ) {
 
             $statement->execute();
 
-            Reg_Sucursal( $codigo, $desc, $con );
         }
     }
 

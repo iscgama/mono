@@ -7,7 +7,6 @@
     $pago = $_POST['pago'];
     $cambio = $_POST['cambio'];
     $forma = $_POST['forma'];
-    $sucursal = $_POST['sucursal'];
     $idu = $_POST['idu'];
     $cliente = $_POST['cliente'];
 
@@ -58,14 +57,14 @@
         //Insertamos un renglon de abonos para manejar la cobranza del cliente
         $sql = "INSERT INTO `cobranza`(`id_cb`, `fecha_cb`, `hora_cb`, 
                             `id_ct`, `monto_cb`, `saldo_cb`, `id_v`, `id_u`) 
-                VALUES (null, NOW(), NOW(), :idc, :monto, :saldo, :venta, :sucursal)";
+                VALUES (null, NOW(), NOW(), :idc, :monto, :saldo, :venta, :idu)";
                 
         $statement = $con->prepare($sql);
         $statement->bindParam(':idc', $id_ct);
         $statement->bindParam(':monto', $cambio);
         $statement->bindParam(':saldo', $cambio);
         $statement->bindParam(':venta', $venta);
-        $statement->bindParam(':sucursal', $sucursal);
+        $statement->bindParam(':idu', $idu);
 
         $statement->execute();
     }
@@ -111,50 +110,39 @@
 
         //Si el producto maneja inventario entonces se descuenta de inventario en sucursal
         if ($inventario == 1) {
-            //1.- Verificamos que exista el renglon de la sucursal con el producto asignado
-            $sql2 = "SELECT exist_e FROM existsuc WHERE id_s = '" . $sucursal . "' AND id_a = " . $ida;
-            $res2 = $con->query($sql2);
-            $res2->execute();
-    
-            
-            foreach ($res2 as $a2) {
-                $existe = $a2['exist_e'];
-            }
-    
-            //Sino se ha asignado una cantidad de productos a la sucursal anexamos el producto
-            //Con la existencia negativa
-            if ($existe == null) {
-                $existe = 0;
-                $existe = 0 - $a['cant_v'];
-                $sql = "INSERT INTO `existsuc`(`id_ex`, `id_s`, `id_a`, `exist_e`, `id_u`)
-                             VALUES (null, :sucursal, :ida, :existe, :idu);";
-    
-                        
-                $statement = $con->prepare($sql);
-                $statement->bindParam(':sucursal', $sucursal);
-                $statement->bindParam(':ida', $ida);
-                $statement->bindParam(':existe', $existe);
-                $statement->bindParam(':idu', $idu);
-    
-                $statement->execute();
-            }else {
-                //Si existe se actualiza la cantidad de productos menos la venta
-                $existe -= $a['cant_v'];
-                $sql3 = "UPDATE existsuc SET exist_e = :existe 
-                            WHERE id_s = :sucursal AND id_a = :ida";
-    
+                $sql2 = "SELECT egral_a FROM articulos WHERE id_a = " . $ida;
+                $res2 = $con->query($sql2);
+                $res2->execute();
+        
+                
+                foreach ($res2 as $a2) {
+                    $existe = $a2['egral_a'];
+                }
+        
+                //Sino se ha asignado una cantidad de productos a la sucursal anexamos el producto
+                //Con la existencia negativa
+                if ($existe == null) {
+                    $existe = 0;
+                    $existe = 0 - $a['cant_v'];
+                }else {
+                    $existe -= $a['cant_v'];
+                }
+                    
+                    
+                    
+                $sql3 = "UPDATE articulos SET egral_a = :existe 
+                            WHERE id_a = :ida";
+
                         
                 $statement = $con->prepare($sql3);
                 $statement->bindParam(':existe', $existe);
-                $statement->bindParam(':sucursal', $sucursal);
                 $statement->bindParam(':ida', $ida);
-    
+
                 $statement->execute();
             }   
         }
 
 
-    }
     
     echo 1;
     

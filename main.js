@@ -226,7 +226,7 @@ const producto_listar = ( codigo ) => {
                     url: 'php/agregar_reng_vta.php',
                     data: 'ida=' + res.ida + '&precio=' + res.precio 
                             + '&venta=' + venta + '&idu=' + idu
-                            + '&sucursal=' + sucursal + '&cliente=' + cliente,
+                            + '&cliente=' + cliente,
                     success: ( res ) => {
                         $('#escritos').html(res);
                         detalle_vta();
@@ -787,7 +787,7 @@ const finalizar_venta = ( )  => {
     let pago = $('#pagov').val();
     let cambio = $('#cambiov').val();
     let venta = localStorage.getItem('venta');
-    let sucursal = localStorage.getItem('sucursal');
+    // let sucursal = localStorage.getItem('sucursal');
     let idu = localStorage.getItem('idu');
     let cliente = $('#clientev').val();
     //-------------------------------------------------------------
@@ -800,7 +800,7 @@ const finalizar_venta = ( )  => {
                 url: 'php/finalizar_vta.php',
                 data: 'forma=' + forma + '&cambio=' + cambio 
                         + '&pago=' + pago + '&venta=' + venta 
-                        + '&sucursal=' + sucursal + '&idu=' + idu + '&cliente=' + cliente,
+                        + '&idu=' + idu + '&cliente=' + cliente, 
                 success: (res) => {
                     if (res == 1) {
                         imprimir_formato( venta , '');

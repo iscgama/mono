@@ -4,7 +4,7 @@
 
     $usuario = $_POST['usuario'];
     $tipo = $_POST['tipo'];
-    $sucursal = $_POST['sucursal'];
+    // $sucursal = $_POST['sucursal'];
 
 
     //En caso de que el numero de sucursal sea 0 este indica que el usuario
@@ -125,27 +125,27 @@
 
 
     if ($ventas_r) {
-        $salida .= ' <li class="nav-item" id="mventas">
-                        <a class="nav-link "><i class="fa-solid fa-coins"></i> Ventas</a>
-                    </li>';
+        // $salida .= ' <li class="nav-item" id="mventas">
+        //                 <a class="nav-link "><i class="fa-solid fa-coins"></i> Ventas</a>
+        //             </li>';
     }
 
 
-    if ($prods_r) {
-        $salida .= ' <li class="nav-item" id="mstore">
-                        <a class="nav-link" ><i class="fa-solid fa-box-open-full"></i> Mis Prods</a>
-                    </li>';
-    }
+    // if ($prods_r) {
+    //     $salida .= ' <li class="nav-item" id="mstore">
+    //                     <a class="nav-link" ><i class="fa-solid fa-box-open-full"></i> Mis Prods</a>
+    //                 </li>';
+    // }
 
                
 
     if ($usuario != '') {        
         $salida.=  '<li class="nav-item dropdown" >
                         <a class="nav-link dropdown-toggle"  id="mcatalogos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa-duotone fa-window-restore"></i> Bodega
+                            <i class="fa-duotone fa-window-restore"></i> Catalogos
                         </a>
                         <div class="dropdown-menu" aria-labelledby="mcatalogos">';
-                        $salida .= ($prods_r) ? '<a class="dropdown-item" id="mprods"><i class="fa-solid fa-crate-apple"></i> Productos</a>': '';
+                        $salida .= ($prods_r) ? '<a class="dropdown-item" id="mprods"><i class="fa-solid fa-crate-apple"></i> Lista de productos</a>': '';
                         $salida .= ($prods_r) ? '<a 
                                                     class="dropdown-item" 
                                                     id="nprods"
@@ -159,8 +159,8 @@
                         $salida .= ($clientes_r) ? '<a class="dropdown-item" id="mcte"><i class="fa-duotone fa-user-group"></i> Clientes</a>' : '';
                         $salida .= ($clientes_r) ? '<a class="dropdown-item" id="mcobranza"><i class="fa-duotone fa-money-bills-simple"></i> Cobranza</a>' : '';
                         $salida .= ($provedor_r) ? '<a class="dropdown-item" id="mpr"><i class="fa-regular fa-users"></i> Proveedores</a>' : '';
-                        $salida .= '<div class="dropdown-divider"></div>';
-                        $salida .= ($sucurs_r) ? '<a class="dropdown-item" id="msucursales"><i class="fa-duotone fa-store"></i> Sucursales</a>' : '';
+                        // $salida .= '<div class="dropdown-divider"></div>';
+                        // $salida .= ($sucurs_r) ? '<a class="dropdown-item" id="msucursales"><i class="fa-duotone fa-store"></i> Sucursales</a>' : '';
                     $salida .= '</div>
                 </li>
                 
@@ -180,8 +180,8 @@
                 $salida .= ($compras_r) ? '<a class="dropdown-item" id="mcompras"><i class="fa-duotone fa-bags-shopping"></i> Compras de mercancía</a>' : '';
                 $salida .= ($pedidos_r) ? '<a class="dropdown-item" id="mpedidos"><i class="fa-solid fa-paper-plane"></i> Pedidos de compras</a>' : '';
                 $salida .= '<div class="dropdown-divider"></div>';
-                $salida .= ($traspasos_r) ? '<a class="dropdown-item" id="mtraspasos"><i class="fa-duotone fa-people-carry-box"></i> Traspasos a sucursal</a>' : '';
-                $salida .= ($traspasos_r) ? '<a class="dropdown-item" id="mtrassuc"><i class="fa-duotone fa-people-carry-box"></i> Traspasos entre sucursales</a>' : '';
+                // $salida .= ($traspasos_r) ? '<a class="dropdown-item" id="mtraspasos"><i class="fa-duotone fa-people-carry-box"></i> Traspasos a sucursal</a>' : '';
+                // $salida .= ($traspasos_r) ? '<a class="dropdown-item" id="mtrassuc"><i class="fa-duotone fa-people-carry-box"></i> Traspasos entre sucursales</a>' : '';
         
             $salida .= ' </div>';
     }else {
@@ -202,7 +202,7 @@ $salida .= '
                 </a>
                 <div class="dropdown-menu" aria-labelledby="madmon">';
 
-                $salida .= ($cajas_r) ? '<a class="dropdown-item" id="mrptvta"><i class="fa-duotone fa-coins"></i>  Ventas</a>' : '';
+                // $salida .= ($cajas_r) ? '<a class="dropdown-item" id="mrptvta"><i class="fa-duotone fa-coins"></i>  Ventas</a>' : '';
                 $salida .= ($cajas_r) ? '<a class="dropdown-item" id="mrptinv"><i class="fa-solid fa-chart-pie"></i>  Inventario</a>' : '';
                 $salida .= ($cajas_r) ? '<a class="dropdown-item" id="mrptcte"><i class="fa-duotone fa-users"></i>  Clientes</a>' : '';
                 $salida .= ($cajas_r) ? '<a class="dropdown-item" id="mrptcomp"><i class="fa-solid fa-bags-shopping"></i>   Compras</a>' : '';

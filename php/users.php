@@ -3,9 +3,8 @@
     require_once 'conexion.php';
 
     $sql = "SELECT u.id_u, u.name_u, u.user_u, 
-				r.desc_r, s.nom_s FROM usuarios u
+				r.desc_r FROM usuarios u
 					INNER JOIN roles r ON u.id_r = r.id_r
-					INNER JOIN sucursales s ON u.id_s = s.id_s
 				WHERE u.id_u <> 1
             ";
 
@@ -18,7 +17,6 @@
 		            	<th>#</th>
 		                <th>Nombre completo</th>
 		                <th>Usuario</th>
-                        <th>Sucursal</th>
                         <th>Rol</th>
 		                <th>Acciones</th>
 		            </tr>
@@ -32,7 +30,6 @@
 					<td>' . $num .  '</td>
 					<td>' . $a['name_u'] . '</td>
 					<td>' . $a['user_u'] . '</td>
-					<td>' . $a['nom_s'] . '</td>
 					<td>' . $a['desc_r'] . '</td>
 					';
                     
@@ -67,7 +64,7 @@
 	            'copy',
 	            {
 	                extend: 'excel',
-	                messageTop: 'CyberSoft'
+	                messageTop: 'GamaSoft'
 	            },
 	            {
 	                extend: 'pdf',

@@ -7,7 +7,6 @@
     $precio = $_POST['precio'];
     $venta = $_POST['venta'];
     $idu = $_POST['idu'];
-    $sucursal = $_POST['sucursal'];
     $cliente = $_POST['cliente'];
 
     $valores = array(
