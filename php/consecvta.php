@@ -3,7 +3,7 @@
     require_once 'conexion.php';
 
     $idu = $_POST['idu'];
-    $sucursal = $_POST['sucursal'];
+    // $sucursal = $_POST['sucursal'];
 
     //echo 'El idu=' . $idu . ' la sucursal='  . $sucursal;
     /*
@@ -30,15 +30,14 @@
     $sql = "INSERT INTO ventas (
         ventan_v, id_ct, id_u, id_ca, monto_v, 
         pago_v, cambio_v, forma_v, status_v,
-        corte_v, id_s, fecha_v, hora_v
+        corte_v, fecha_v, hora_v
     ) VALUES (
-        :consecutivo, 1, :idu, 0, 0, 0, 0, '', 1, 0, :sucursal, NOW(), NOW()
+        :consecutivo, 1, :idu, 0, 0, 0, 0, '', 1, 0, NOW(), NOW()
     )";    
 
     $stm = $con->prepare( $sql );
     $stm->bindParam(":consecutivo", $consecutivo);
     $stm->bindParam(":idu", $idu);
-    $stm->bindParam(":sucursal", $sucursal);
 
     $stm->execute();
 

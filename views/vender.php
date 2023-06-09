@@ -5,61 +5,6 @@
 
     $usuario = $_POST['usuario'];
 
-    $sql = "SELECT id_s FROM usuarios WHERE user_u = '" . $usuario . "'";
-    
-    $res = $con->query($sql);
-    $res->execute();
-
-    $sucursal = 0;
-
-    foreach ($res as $a) {
-        $sucursal = $a['id_s'];
-    }
-    
-
-    if ($sucursal == 0) {
-        $salida = '
-            <div class="container-fluid">
-                <br>
-                <h1>
-                    <i class="fa-duotone fa-circle-exclamation"></i> Aviso Importante
-                </h1>
-                <hr>
-                <br>
-                <p>
-                El usuario administrador (admin) no pertenece a ninguna sucursal,
-                si desea realizar <b>VENTAS</b> debes seguir estos pasos:</p>
-                </ol>
-                    <li>
-                        Registrar una <b>SUCURSAL</b> a través del 
-                        menú <i class="fa-duotone fa-window-restore"></i> <b>Bodega</b> -> 
-                        <i class="fa-duotone fa-store"></i> <b>Sucursales</b> y posteriormente
-                    </li>
-                    
-                    <li>
-                    Así como el <b>ROL</b> que desee
-                   para ese colaborador (Cajero, Encargado, Supervisor, etc..) que puede
-                   definir con el menú <i class="fa-duotone fa-gears"></i> <b>Sistema</b> ->
-                   <i class="fa-duotone fa-chess"></i> <b>Roles</b>
-                    
-                    </li>
-                    <li>
-                        Registrar cada <b>USUARIO</b> que desee para ventas a través del menú
-                    <i class="fa-duotone fa-gears"></i> <b>Sistema</b> -> 
-                    <i class="fa-duotone fa-user-lock"></i> <b>Usuarios</b>
-                    </li>
-                <ol>
-                <br>
-                <p>Con estos pasos realizados debemos cerrar sesión, e ingresar con el usuario
-                    nuevo para las <b>VENTAS</b>
-                </p>
-                
-                
-            </div>
-        ';
-
-        echo $salida;
-    }else {
         $salida = '';
     
         $sql = "SELECT nom_ct FROM clientes";
@@ -190,10 +135,6 @@
     
     
         echo $salida;
-
-    }
-
-
 
 ?>
 

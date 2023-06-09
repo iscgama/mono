@@ -8,7 +8,7 @@
     $usuario = $_POST['usuario'];
     $pass = $_POST['pass'];
     $roles = $_POST['roles'];
-    $sucursales = $_POST['sucursales'];
+    // $sucursales = $_POST['sucursales'];
    
     
     
@@ -21,14 +21,14 @@
         $roles = $a['id_r'];
     }
 
-    //Consultar ID de sucursal
-    $sql = "SELECT id_s FROM sucursales WHERE nom_s = '" . $sucursales . "'";
-    $res = $con->query($sql);
-    $res->execute();
+    // //Consultar ID de sucursal
+    // $sql = "SELECT id_s FROM sucursales WHERE nom_s = '" . $sucursales . "'";
+    // $res = $con->query($sql);
+    // $res->execute();
 
-    foreach ($res as $a) {
-        $sucursales = $a['id_s'];
-    }      
+    // foreach ($res as $a) {
+    //     $sucursales = $a['id_s'];
+    // }      
 
     
     if ($usuario <> $anterior) {
@@ -48,7 +48,7 @@
     if ($cont > 0) {
         echo 'El usuario que intentas actualizar ya existe';
     }else {
-        $sql = "UPDATE usuarios SET name_u = '" . $nombre . "', user_u = '" . $usuario . "', pass_u = '" . $pass . "', id_r = " . $roles . ", id_s = " . $sucursales . " WHERE user_u = '" . $anterior . "'";
+        $sql = "UPDATE usuarios SET name_u = '" . $nombre . "', user_u = '" . $usuario . "', pass_u = '" . $pass . "', id_r = " . $roles . " WHERE user_u = '" . $anterior . "'";
         $res = $con->query($sql);
         $res->execute();
 

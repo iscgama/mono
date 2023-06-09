@@ -137,10 +137,9 @@ const verificar = (  ) => {
             success:  ( res ) => {
                 if (res.estado === 'ok') {
                     let tipo = res.tipo;
-                    let sucursal = res.sucursal;
                     let idu = res.idu;
                     localStorage.setItem('tipo', tipo);
-                    localStorage.setItem('sucursal', sucursal);
+                    // localStorage.setItem('sucursal', sucursal);
                     localStorage.setItem('usuario', usuario);
                     localStorage.setItem('idu', idu);
                     cargar_menu( );

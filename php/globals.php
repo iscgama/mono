@@ -4,7 +4,7 @@
 	$userbd = 'tpvgamas_gamasoft';
 	$passbd = 'M1.Cu3nt@'; */
 	$servidorbd = 'localhost';
-	$bd = 'softpoint';
+	$bd = 'mono';
 	$userbd = 'root';
 	$passbd = '';
 ?>

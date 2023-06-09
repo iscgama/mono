@@ -13,22 +13,20 @@
 
 
 	$usercryp = $usuario;
-	$passcryp = $password;
+	$passcryp = md5($password);
 
 
-	$sql = "SELECT id_u, id_r, id_s FROM usuarios WHERE user_u = '" . $usercryp . "' AND pass_u = '" . $passcryp . "'";
+	$sql = "SELECT id_u, id_r FROM usuarios WHERE user_u = '" . $usercryp . "' AND pass_u = '" . $passcryp . "'";
 
 	$resultado = $con->query($sql);
 	$resultado->execute();
 
 
 	$tipo = 0;
-	$sucursal = 0;
 	$idu = 0;
 
 	foreach ($resultado as $fila) {
 		$tipo = $fila['id_r'];
-		$sucursal = $fila['id_s'];
 		$idu = $fila['id_u'];
 	}
 
@@ -38,7 +36,6 @@
 		$datos = array (
 			'estado' => 'ok',
 			'tipo' => $tipo,
-			'sucursal' => $sucursal,
 			'idu' => $idu
 		);
 	}else {

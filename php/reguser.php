@@ -7,7 +7,7 @@
     $usuario = $_POST['usuario'];
     $pass = $_POST['pass'];
     $roles = $_POST['roles'];
-    $sucursales = $_POST['sucursales'];
+    // $sucursales = $_POST['sucursales'];
     $operacion = $_POST['operacion'];
    
     
@@ -21,14 +21,14 @@
         $roles = $a['id_r'];
     }
 
-    //Consultar ID de sucursal
-    $sql = "SELECT id_s FROM sucursales WHERE nom_s = '" . $sucursales . "'";
-    $res = $con->query($sql);
-    $res->execute();
+    // //Consultar ID de sucursal
+    // $sql = "SELECT id_s FROM sucursales WHERE nom_s = '" . $sucursales . "'";
+    // $res = $con->query($sql);
+    // $res->execute();
 
-    foreach ($res as $a) {
-        $sucursales = $a['id_s'];
-    }      
+    // foreach ($res as $a) {
+    //     $sucursales = $a['id_s'];
+    // }      
 
 
 
@@ -49,8 +49,10 @@
         if ($id != 0) {
             echo 'Error al intentar registrar un usuario este ya existe intente con otro';
         }else {
-            $sql = "INSERT INTO `usuarios`(`id_u`, `name_u`, `user_u`, `pass_u`, `id_r`, `id_s`)  
-                    VALUES (null, :nombre, :usuario, :pass, :roles, :sucursales);";
+
+            $pass = md5( $pass );
+            $sql = "INSERT INTO `usuarios`(`id_u`, `name_u`, `user_u`, `pass_u`, `id_r`)  
+                    VALUES (null, :nombre, :usuario, :pass, :roles,);";
     
             
             $statement = $con->prepare($sql);
@@ -58,7 +60,6 @@
             $statement->bindParam(':usuario', $usuario);
             $statement->bindParam(':pass', $pass);
             $statement->bindParam(':roles', $roles);
-            $statement->bindParam(':sucursales', $sucursales);
     
     
             $statement->execute();
