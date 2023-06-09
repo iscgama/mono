@@ -12,7 +12,7 @@
     if ($tipo != 0 && $sucursal != 0) {
         //Sino se busca el acceso de cada elemento y la sucursal que corresponda
         $sql = "SELECT desc_r, marcas_r, clasif_r, sucurs_r, clientes_r, cobranza_r,
-                        entradas_r, salidas_r, compras_r, pedidos_r,
+                        entradas_r, salidas_r, compras_r, ajustes_r,
                         traspasos_r, ventas_r, usuarios_r, roles_r, prods_r, 
                         permisos_r, cajeros_r, cajas_r, datos_r, provedor_r
                     FROM roles
@@ -31,7 +31,7 @@
         $entradas_r = 0;
         $salidas_r = 0;
         $compras_r = 0;
-        $pedidos_r = 0;
+        $ajustes_r = 0;
         $traspasos_r = 0;
         $ventas_r = 0;
         $usuarios_r = 0;
@@ -54,7 +54,7 @@
                 $entradas_r = $a['entradas_r'];
                 $salidas_r = $a['salidas_r'];
                 $compras_r = $a['compras_r'];
-                $pedidos_r = $a['pedidos_r'];
+                $ajustes_r = $a['ajustes_r'];
                 $traspasos_r = $a['traspasos_r'];
                 $ventas_r = $a['ventas_r'];
                 $usuarios_r = $a['usuarios_r'];
@@ -81,7 +81,7 @@
             $entradas_r = 1;
             $salidas_r = 1;
             $compras_r = 1;
-            $pedidos_r = 1;
+            $ajustes_r = 1;
             $traspasos_r = 1;
             $ventas_r = 1;
             $config_r = 1;
@@ -178,7 +178,7 @@
                 $salida .= ($salidas_r) ? '<a class="dropdown-item" id="msalidas"><i class="fa-regular fa-cart-minus"></i> Salidas al inventario</a>' : '';
                 $salida .= '<div class="dropdown-divider"></div>';
                 $salida .= ($compras_r) ? '<a class="dropdown-item" id="mcompras"><i class="fa-duotone fa-bags-shopping"></i> Compras de mercancía</a>' : '';
-                $salida .= ($pedidos_r) ? '<a class="dropdown-item" id="mpedidos"><i class="fa-solid fa-paper-plane"></i> Pedidos de compras</a>' : '';
+                $salida .= ($ajustes_r) ? '<a class="dropdown-item" id="majuste"><i class="fa-solid fa-paper-plane"></i> Ajuste de Inventario</a>' : '';
                 $salida .= '<div class="dropdown-divider"></div>';
                 // $salida .= ($traspasos_r) ? '<a class="dropdown-item" id="mtraspasos"><i class="fa-duotone fa-people-carry-box"></i> Traspasos a sucursal</a>' : '';
                 // $salida .= ($traspasos_r) ? '<a class="dropdown-item" id="mtrassuc"><i class="fa-duotone fa-people-carry-box"></i> Traspasos entre sucursales</a>' : '';

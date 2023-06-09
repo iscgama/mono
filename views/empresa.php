@@ -91,5 +91,3 @@
     echo $salida;
 
 ?>
-
-<script src="actions/empresa.js"></script>

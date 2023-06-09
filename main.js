@@ -1654,34 +1654,30 @@ const save_rol = ( ) => {
     let marcas = ($('#marcas').is(':checked') ? 1 : 0);
     let clientes = ($('#clientes').is(':checked') ? 1 : 0);
     let pr = ($('#pr').is(':checked') ? 1 : 0);
-    let sucursales = ($('#sucursales').is(':checked') ? 1 : 0);
     let cajas = ($('#cajas').is(':checked') ? 1 : 0);
     let entradas = ($('#entradas').is(':checked') ? 1 : 0);
     let salidas = ($('#salidas').is(':checked') ? 1 : 0);
     let compras = ($('#compras').is(':checked') ? 1 : 0);
-    let pedidos = ($('#pedidos').is(':checked') ? 1 : 0);
-    let traspasos = ($('#traspasos').is(':checked') ? 1 : 0);
+    let ajustes = ($('#ajustes').is(':checked') ? 1 : 0);
     let usuarios = ($('#usuarios').is(':checked') ? 1 : 0);
     let roles = ($('#roles').is(':checked') ? 1 : 0);
-    let cajeros = ($('#cajeros').is(':checked') ? 1 : 0);
     let permisos = ($('#permisos').is(':checked') ? 1 : 0);
     let datos = ($('#datos').is(':checked') ? 1 : 0);
     let cobranza = ($('#cobranza').is(':checked') ? 1 : 0);
     let vender = 1;
-    let operacion = 0;
     
     if(desc != '') {
         $.ajax({
             type: 'POST',
             url: 'php/regrol.php',
             data: 'productos=' + productos + '&clasif=' + clasif + '&marcas=' + marcas
-                    + '&clientes=' + clientes  + '&pr=' + pr + '&sucursales=' + sucursales
+                    + '&clientes=' + clientes  + '&pr=' + pr 
                     + '&cajas=' + cajas + '&entradas=' + entradas + '&salidas=' + salidas
-                    + '&compras=' + compras + '&pedidos=' + pedidos + '&traspasos=' + traspasos
-                    + '&usuarios=' + usuarios + '&roles=' + roles + '&cajeros=' + cajeros
-                    + '&permisos=' + permisos + '&datos=' + datos + '&operacion=' + operacion
+                    + '&compras=' + compras + '&ajustes=' + ajustes 
+                    + '&usuarios=' + usuarios + '&roles=' + roles 
+                    + '&permisos=' + permisos + '&datos=' + datos
                     + '&desc=' + desc + '&cobranza=' + cobranza + '&vender=' + vender,
-            success: function(res) {
+            success: ( res ) => {
                 if (res == 1) {
                     $('#mensaje').html('Se ha registrado con éxito');
                     $('#contenido').load('views/roles.html');
@@ -1703,16 +1699,13 @@ const selected_controls = ( ) => {
     $('#marcas').attr('checked', valor);
     $('#clientes').attr('checked', valor);
     $('#pr').attr('checked', valor);
-    $('#sucursales').attr('checked', valor);
     $('#cajas').attr('checked', valor);
     $('#entradas').attr('checked', valor);
     $('#salidas').attr('checked', valor);
     $('#compras').attr('checked', valor);
-    $('#pedidos').attr('checked', valor);
-    $('#traspasos').attr('checked', valor);
+    $('#ajustes').attr('checked', valor);
     $('#usuarios').attr('checked', valor);
     $('#roles').attr('checked', valor);
-    $('#cajeros').attr('checked', valor);
     $('#permisos').attr('checked', valor);
     $('#datos').attr('checked', valor);
     $('#cobranza').attr('checked', valor);

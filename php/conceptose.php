@@ -3,8 +3,7 @@
     require_once 'conexion.php';
     
     $sql = "SELECT id_ce, desc_ce
-            FROM conceptos_ent
-            WHERE id_ce <> 1";
+            FROM conceptos_ent";
 
     $res = $con->query($sql);
     $res->execute();
