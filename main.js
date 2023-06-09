@@ -1203,11 +1203,10 @@ const eliminar_entrada =( id ) => {
 
 
 const finalizar_entrada = ( id ) => {
-    let sucursal = localStorage.getItem('sucursal');
     $.ajax({
         type: 'POST',
         url: 'php/finalizarentrada.php',
-        data: 'id=' + id + '&sucursal=' + sucursal,
+        data: 'id=' + id,
         success: ( res ) => {
             if (res == 1) {
                 mensajes('Entrada realizada con éxito');
@@ -1243,11 +1242,10 @@ const eliminar_salida =( id ) => {
 
 
 const finalizar_salida = ( id ) => {
-    let sucursal = localStorage.getItem('sucursal');
     $.ajax({
         type: 'POST',
         url: 'php/finalizarsalida.php',
-        data: 'id=' + id + '&sucursal=' + sucursal,
+        data: 'id=' + id,
         success: ( res ) => {
             if (res == 1) {
                 mensajes('Entrada realizada con éxito');

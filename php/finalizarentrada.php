@@ -4,7 +4,6 @@
     require_once 'conexion.php';
 
     $id = $_POST['id'];
-    $sucursal = $_POST['sucursal'];
 
     //Obtenemos toda la información de la entrada actual
     $sql = "SELECT cant_e, id_a FROM entradas2 WHERE id_e = " . $id;
@@ -14,7 +13,7 @@
     
     //Por cada renglon afectamos el inventario
     foreach ($res as $a) {
-        $sql2 = "SELECT exist_e FROM existsuc WHERE id_a = " . $a['id_a'] . " AND id_s = " . $sucursal;
+        $sql2 = "SELECT egral_a FROM articulos WHERE id_a = " . $a['id_a'];
         $res2 = $con->query($sql2);
         $res2->execute();
         
@@ -26,18 +25,17 @@
         $actual = 0;
 
         foreach ($res2 as $a2) {
-            $actual = $a2['exist_e'];
+            $actual = $a2['egral_a'];
         }
 
         $exist = $existcompra + $actual;
 
-        $sql3 = "UPDATE existsuc SET exist_e = :exist WHERE id_a = :ida AND id_s = :sucursal";
+        $sql3 = "UPDATE articulos SET egral_a = :exist WHERE id_a = :ida";
     
             
         $statement = $con->prepare($sql3);
         $statement->bindParam(':exist', $exist);
         $statement->bindParam(':ida', $a['id_a']);
-        $statement->bindParam(':sucursal', $sucursal);
 
         $statement->execute();
 
