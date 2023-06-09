@@ -1,0 +1,41 @@
+<br>
+<div class="container-fluid">
+    <center>
+    <h1 class="display-4">
+        <i class="fal fa-cash-register"></i> Corte de Caja
+    </h1>
+    <hr class="display-4">
+    <br>
+    <button class="btn btn-outline-danger btn-block" style="max-width: 350px;" id="imprimir_corte">
+        <i class="fal fa-print"></i> Imprimir Corte
+    </button>
+    </center>
+    <br>
+    <div class="container-fluid" id="listcorte">
+    
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<script>
+    $(document).ready(function () {
+        let sucursal = localStorage.getItem('sucursal');
+        let usuario = localStorage.getItem('usuario');
+        $.ajax({
+            type: 'POST',
+            url: 'php/cortesucursal.php',
+            data: 'sucursal=' + sucursal + '&usuario=' + usuario,
+            success: function(res) {
+                $('#listcorte').html(res);
+            }
+        });
+
+        $('#imprimir_corte').on('click', function() {
+            let sucursal = localStorage.getItem('sucursal');
+            let usuario = localStorage.getItem('usuario');
+            imprimir_corte(sucursal, usuario, 0);
+        });
+    });
+</script>

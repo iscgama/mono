@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <br><br>
+<h1 class="display-4">
+    <i class="fas fa-file-chart-pie"></i> Reporte individual
+</h1>
+<hr class="display-4">
+<div id="listareportes">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+</div>
+
+<div id="resultado">
+    
+</div>
+<br>
+<br>
+<br>
+<br>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: 'POST',
+            url: 'php/reportes.php',
+            success:function(res) {
+                $('#listareportes').html(res);
+            }
+        });
+    });
+</script>

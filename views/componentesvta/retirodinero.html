@@ -1,0 +1,31 @@
+<h1 class="title">
+    Retiro de dinero
+</h1>
+<hr>
+<div class="form-group">
+    <label for="concepto">Concepto de retiro</label>
+    <input type="text" id="concepto" class="form-control">
+</div>
+<div class="form-group">
+    <label for="monto">Monto de retiro</label>
+    <input type="number" id="monto" class="form-control">
+</div>
+<br>
+<div class="alert alert-danger" role="alert" id="error" style="display: none;">
+  
+</div>
+<br>
+<button 
+    class="btn btn-outline-danger" 
+    onclick="retirar_dinero();"
+>
+    <i class="fal fa-sack"></i> Retirar dinero
+</button>
+
+
+<script>
+    $(document).ready( ( ) => {
+        $('#concepto').focus();
+
+    });
+</script>

@@ -1,0 +1,39 @@
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">
+                <i class="fa-duotone fa-layer-group"></i> Clasificaciones
+            </h1>
+        </div>
+        <div class="col-md-6">
+            <button 
+                class="btn btn-outline-danger btn-block" 
+                id="nclasifica"
+                onclick="botono_nueva_clasificacion( );"
+            >
+                <i class="fas fa-plus-circle"></i> Nueva clasificacion
+            </button>
+        </div>
+    </div>
+    <hr class="display-4">
+    <div class="container-fluid" id="listclasifica">
+    
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<script>
+    $(document).ready( ( ) => {
+        $('#listclasifica').html('<div class="spinner-grow text-primary" role="status"><span class="sr-only">Loading...</span></div>');
+        $.ajax({
+            type: 'POST',
+            url: 'php/clasifica.php',
+            success:( res ) => {
+                $('#listclasifica').html(res);
+            }
+        });
+    });
+</script>

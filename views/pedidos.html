@@ -1,0 +1,39 @@
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">
+                <i class="fal fa-clipboard-list-check"></i> Pedidos de compra
+            </h1>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-outline-danger btn-block" id="npedido">
+                <i class="fas fa-plus-circle"></i> Nuevo pedido
+            </button>
+        </div>
+    </div>
+    <hr class="display-4">
+    <div class="container-fluid" id="listpedidos">
+    
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<script>
+    $(document).ready(function () {
+        $('#listpedidos').html('<div class="spinner-grow text-primary" role="status"><span class="sr-only">Loading...</span></div>');
+            $.ajax({
+                type: 'POST',
+                url: 'php/pedidos.php',
+                success:function(res) {
+                    $('#listpedidos').html(res);
+                }
+            });
+
+            $('#npedido').on('click', function() {
+                $('#contenido').load('views/newpedido.php');
+            });
+        });
+</script>

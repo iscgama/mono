@@ -1,0 +1,41 @@
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">
+                <i class="fa-regular fa-users"></i> Lista de proveedores
+            </h1>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-outline-danger btn-block" id="npr">
+                <i class="fas fa-plus-circle"></i> Nuevo proveedor
+            </button>
+        </div>
+    </div>
+    <hr class="display-4">
+    <div class="container-fluid" id="listpr">
+    
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<script>
+    $(document).ready( ( ) => {
+        $('#listpr').html('<div class="spinner-grow text-primary" role="status"><span class="sr-only">Loading...</span></div>');
+        $.ajax({
+            type: 'POST',
+            url: 'php/prs.php',
+            success:( res ) => {
+                $('#listpr').html(res);
+            }
+        });
+
+
+        $('#npr').on('click', ( ) => {
+            $('#mensaje').load('views/newpr.php');
+            $('#ventana').modal('toggle');
+        });
+    });
+</script>

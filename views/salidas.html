@@ -1,0 +1,39 @@
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">
+                <i class="fa-regular fa-cart-minus"></i> Salidas
+            </h1>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-outline-danger btn-block" id="nsalida">
+                <i class="fas fa-plus-circle"></i> Nuevo salida
+            </button>
+        </div>
+    </div>
+    <hr class="display-4">
+    <div class="container-fluid" id="listsalidas">
+    
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<script>
+    $(document).ready( ( ) => {
+        $('#listsalidas').html('<div class="spinner-grow text-primary" role="status"><span class="sr-only">Loading...</span></div>');
+        $.ajax({
+            type: 'POST',
+            url: 'php/salidas.php',
+            success:( res ) => {
+                $('#listsalidas').html(res);
+            }
+        });
+
+        $('#nsalida').on('click', function() {
+            $('#contenido').load('views/newsalida.php');
+        });
+    });
+</script>

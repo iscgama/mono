@@ -1,0 +1,48 @@
+<h1 class="display-4">
+    <i class="fas fa-feather-alt"></i> Registro
+    </h1>
+    <hr class="display-4">
+    <div class="form-group">
+        <label for="sucursal">Nombre de la Sucursal</label>
+        <input type="text" id="sucursal" class="form-control" placeholder="Escribe el nombre de la sucursal">
+    </div>   
+    <div class="form-group">
+        <label for="direccion">Dirección de la sucursal</label>
+        <input type="text" id="direccion" class="form-control" placeholder="Escribe la direccion de la sucursal">
+    </div>   
+    <div class="form-group">
+        <label for="telefono">Teléfono</label>
+        <input type="tel" id="telefono" class="form-control" placeholder="Escribe la telefono de la sucursal">
+    </div>   
+    <div class="form-group">
+        <label for="cp">Código Postal</label>
+        <input type="text" id="cp" class="form-control" placeholder="Escribe la poblacion de la sucursal">
+    </div>   
+    <div class="form-group">
+        <label for="ciudad">Ciudad de la sucursal</label>
+        <input type="text" id="ciudad" class="form-control" placeholder="Escribe la ciudad de la sucursal">
+    </div>
+    <div class="form-group">
+        <label for="estado">Estado de la sucursal</label>
+        <input type="text" id="estado" class="form-control" placeholder="Escribe el estado de la sucursal">
+    </div>
+    <br>
+    <div class="alert alert-danger" role="alert" id="error" style="display: none;">
+
+    </div>
+    <br>
+    <button class="btn btn-outline-danger btn-block" id="gsucursal">
+        <i class="fas fa-hdd"></i> Guardar datos
+    </button>
+
+<script>
+    $(document).ready( () => {
+        $('#ventana').on('shown.bs.modal',  () => {
+            $('#sucursal').focus();
+        });
+
+        $('#gsucursal').on('click', () => {
+            guardar_sucursal(0, 0);
+        });
+    });
+</script>

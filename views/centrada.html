@@ -1,0 +1,40 @@
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">
+                <i class="fas fa-address-book"></i> Conceptos de entrada
+            </h1>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-outline-danger btn-block" id="nclasifica">
+                <i class="fas fa-plus-circle"></i> Nueva concepto
+            </button>
+        </div>
+    </div>
+    <hr class="display-4">
+    <div class="container-fluid" id="listconceptos">
+    
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<script>
+    $(document).ready(function () {
+        $('#listconceptos').html('<div class="spinner-grow text-primary" role="status"><span class="sr-only">Loading...</span></div>');
+        $.ajax({
+            type: 'POST',
+            url: 'php/conceptose.php',
+            success:function(res) {
+                $('#listconceptos').html(res);
+            }
+        });
+
+        $('#nclasifica').on('click', function() {
+            $('#mensaje').load('views/newconceptoe.html');
+            $('#ventana').modal('toggle');
+        });
+    });
+</script>

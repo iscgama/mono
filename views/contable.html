@@ -1,0 +1,45 @@
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="display-4">
+                <i class="fa-duotone fa-messages-dollar"></i> Registro Contable
+            </h1>
+            <br>
+            <!-- <button class="btn btn-outline-danger my-2" id="global">
+                <i class="fas fa-chart-pie"></i> Ver global
+            </button> -->
+        </div>
+        <div class="col-md-2">
+            <button 
+                class="btn btn-outline-danger btn-block my-2" 
+                id="ningreso"
+                onclick="boton_nuevoingreso( );"
+            >
+                <i class="fas fa-plus-circle"></i> Nuevo ingreso
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button 
+                class="btn btn-outline-danger btn-block my-2" 
+                id="negreso"
+                onclick="boton_nuevoegreso( );"
+            >
+                <i class="fas fa-plus-circle"></i> Nuevo egreso
+            </button>
+        </div>
+    </div>
+    <hr class="display-4">
+    <div class="container-fluid" id="listacaja">
+    
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<script>
+    $(document).ready( ( ) => {
+        mostrar_lista();
+    });
+</script>

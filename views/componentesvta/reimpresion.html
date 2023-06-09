@@ -1,0 +1,26 @@
+<h1 class="title">
+    Reimpresión de tickets
+</h1>
+<hr class="display-4">
+<div class="container">
+    <div class="form-group">
+        <label for="ticket">Indica el número de ticket</label>
+        <input type="number" class="form-control" id="ticketvta" placeholder="Escribe el número de ticket aquí">
+    </div>
+    <br>
+    <div class="alert alert-danger" role="alert" id="error" style="display: none;">
+
+    </div>
+    <button class="btn btn-outline-danger btn-block"
+                onclick="reimprimir_ticket (  )">
+        <i class="fal fa-print"></i> Imprimir ticket
+    </button>
+</div>
+
+<script>
+    $(document).ready( () => {        
+        //$('#ventana').on('shown.bs.modal',  () => {
+            $('#ticketvta').focus();
+        //});
+    });
+</script> 

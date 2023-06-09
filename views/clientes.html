@@ -1,0 +1,41 @@
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">
+                <i class="fa-duotone fa-user-group"></i> Catalogo de clientes
+            </h1>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-outline-danger btn-block" id="ncte">
+                <i class="fas fa-plus-circle"></i> Nuevo cliente
+            </button>
+        </div>
+    </div>
+    <hr class="display-4">
+    <div class="container-fluid" id="listcte">
+    
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<script>
+    $(document).ready( ( ) => {
+        $('#listprod').html('<div class="spinner-grow text-primary" role="status"><span class="sr-only">Loading...</span></div>');
+        $.ajax({
+            type: 'POST',
+            url: 'php/clientes.php',
+            success:( res ) => {
+                $('#listcte').html(res);
+            }
+        });
+
+
+        $('#ncte').on('click', ( ) => {
+            $('#mensaje').load('views/newcte.php');
+            $('#ventana').modal('toggle');
+        });
+    });
+</script>

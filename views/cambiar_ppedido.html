@@ -1,0 +1,69 @@
+<h3>
+    Cambiar precio
+</h3>
+<hr class="display-4">
+<div class="container-fluid text-center" style="margin-left: auto; margin-right: auto;">
+    <div class="input-group">
+        <div class="input-group-append">
+            <button class="btn btn-danger my-3" onclick="decremento();" type="button"><i class="fal fa-minus-circle"></i></button>
+        </div>
+        <input type="number" class="form-control text-center my-3" max="9999" min="1" style="max-width: 70%; font-size: 1.2em;" placeholder="" id="precio">
+        <div class="input-group-append">
+            <button class="btn btn-danger my-3" onclick="aumento()" type="button"><i class="fal fa-plus-circle"></i></button>
+        </div>
+    </div>
+    <br>
+    <div class="alert alert-danger" role="alert" id="error" style="display: none;">
+
+    </div>
+    <br>
+    <button class="btn btn-danger" style="width: 40%;" id="cambiar">
+        <i class="fal fa-exchange-alt"></i>
+    </button>
+</div>
+
+<script>
+    function aumento() {
+        let cantidad = $('#cantidad').val();
+            if (cantidad != '' && !isNaN(cantidad)) {
+                cantidad = parseFloat(cantidad);
+                   cantidad += 1;
+                   $('#cantidad').val(cantidad);
+            }
+    }
+
+    function decremento() {
+        let cantidad = $('#cantidad').val();
+            if (cantidad != '' && !isNaN(cantidad)) {
+                cantidad = parseFloat(cantidad);
+                   cantidad -= 1;
+                   $('#cantidad').val(cantidad);
+            }
+    }
+
+    $(document).ready(function () {
+        $('#ventana').on('shown.bs.modal', function () {
+            let precio = localStorage.getItem('precio');
+            $('#precio').val(precio);
+            $('#precio').focus();
+        });
+
+        $('#cambiar').on('click', function() {
+            let precio = $('#precio').val();
+            let renglon = localStorage.getItem('renglon');
+            if (!isNaN(precio)) {
+                $.ajax({
+                    type: 'POST',
+                    url: 'php/preciopedido.php',
+                    data: 'precio=' + precio + '&renglon=' + renglon,
+                    success: function(res) {
+                        detalle_pedido();
+                        $('#ventana').modal('toggle');
+                    }
+                })
+            }else {
+                mostrar_error('Debes introducir cantidad válida');
+            }
+        })
+    });
+</script>

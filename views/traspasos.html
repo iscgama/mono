@@ -1,0 +1,49 @@
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">
+                <i class="fa-duotone fa-people-carry-box"></i> Traspasos a sucursal
+            </h1>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-outline-danger btn-block" id="ntraspaso">
+                <i class="fas fa-plus-circle"></i> Nuevo traspaso
+            </button>
+        </div>
+    </div>
+    <hr class="display-4">
+    <div id="listtraspaso">
+    
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<script>
+    $(document).ready( ( ) => {
+        $('#listtraspaso').html('<div class="spinner-grow text-primary" role="status"><span class="sr-only">Loading...</span></div>');
+        $.ajax({
+            type: 'POST',
+            url: 'php/traspasos.php',
+            success:( res ) => {
+                $('#listtraspaso').html(res);
+            }
+        });
+
+        $('#ntraspaso').on('click', ( ) => {
+            let idu = localStorage.getItem('idu');
+            let sucursal = localStorage.getItem('sucursal');
+            $.ajax({
+                type: 'POST',
+                url: 'php/traspasos/consecutivo.php',
+                data: 'idu=' + idu + '&sucursal=' + sucursal,
+                success:( res ) => {
+                    localStorage.setItem('numtras', res);
+                    $('#contenido').load('views/newtraspaso.php');
+                }
+            });
+        });
+    });
+</script>

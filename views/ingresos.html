@@ -1,0 +1,81 @@
+<div class="container-fluid">
+    <br><br>
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="display-4">
+                <i class="fas fa-wallet"></i> Catalogo de ingresos
+                <hr class="display-4">
+            </h1>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-info btn-block" id="ingresonew">
+                <i class="fas fa-plus-square"></i> Registrar nuevo ingreso
+            </button>
+            <br>
+            <div class="row">
+                <div class="col-md-4">
+                    <button class="btn btn-block btn-info" id="viewingresos">
+                        <i class="fal fa-file-chart-pie"></i> Generar reporte
+                    </button>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group md-2">
+                        <label for="fechai">Fecha inicial</label>
+                        <input type="date" class="form-control" id="fecha1">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group md-2">
+                        <label for="fechaf">Fecha Final</label>
+                        <input type="date" class="form-control" id="fecha2">
+                    </div>
+                </div>
+            </div>
+            <br>
+            
+        </div>
+    </div>
+    
+    <div id="listaingresos">
+
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+
+<script>
+    $(document).ready(function () {
+        tipoflujo = 1;
+
+        $('#fecha1').val(fecha_actual());
+        $('#fecha2').val(fecha_actual());
+
+        $.ajax({
+            type: 'POST',
+            url: 'php/ingresos.php',
+            success:function(res) {
+                $('#listaingresos').html(res);
+            }
+        });
+
+        $('#ingresonew').on('click', function() {
+            $('#mensaje').load('views/newingreso.php');
+            $('#ventana').modal('toggle');
+        });
+
+        
+
+        $('#viewingresos').on('click', function() {
+            
+            var fecha1 = $('#fecha1').val();
+            var fecha2 = $('#fecha2').val();
+
+            // var printdata = "fecha1=" + fecha1 + "&fecha2=" + fecha2;
+            //     $.get('tickets/ingresos.php', printdata, function(){
+            //             window.open("tickets/ingresos.php?fecha1=" + fecha1 + "&fecha2=" + fecha2); 
+            //     });
+        });
+    });
+</script>

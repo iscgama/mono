@@ -1,0 +1,49 @@
+<br><br>
+<center>
+    <h1 class="display-4">
+        <i class="far fa-shekel-sign"></i> Devolución de mercancía
+    </h1>
+    <hr class="display-4">
+    <div class="container-fluid">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">#</span>
+              </div>
+            <input type="number" name="" id="venta" 
+                class="form-control text-center" placeholder="Indica el número de venta">
+        </div>
+        <br>
+        <div class="container-fluid" id="listvta">
+            
+        </div>
+        <br>
+        <div class="alert alert-danger" role="alert" id="error" style="display: none;">
+
+        </div>
+    </div>
+</center>
+
+<script>
+    $(document).ready(function () {
+        $('#venta').focus();
+
+        $('#venta').on('keypress', () => {
+            let venta = $(this).val();
+            if (e.keyCode == 13) {
+                $(this).attr('disabled', true)
+                if (venta != '' && !isNaN(venta)) {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'php/queryvta.php',
+                        data: 'id=' + venta,
+                        success:( res ) => {
+                            $('#listvta').html(res);
+                        }
+                    });
+                }else {
+                    mostrar_error('Debes introducir un número de venta válido');
+                }
+            }
+        });
+    });
+</script>

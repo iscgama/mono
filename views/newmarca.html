@@ -1,0 +1,28 @@
+<h1 class="display-4">
+    <i class="fas fa-feather-alt"></i> Registro
+</h1>
+<hr class="display-4">
+<div class="form-group">
+    <label for="desc">Descripción de la marca</label>
+    <input type="text" id="desc" class="form-control">
+</div>
+<br>
+<div class="alert alert-danger" role="alert" id="error" style="display: none;">
+
+</div>
+<br>
+<button 
+    class="btn btn-outline-danger btn-block" 
+    id="gmarca"
+    onclick="save_trademark( );"
+>
+    <i class="fas fa-hdd"></i> Guardar datos
+</button>
+
+<script>
+    $(document).ready( ( ) => {
+        $('#ventana').on('shown.bs.modal', function () {
+            $('#desc').focus();
+        });
+    });
+</script>

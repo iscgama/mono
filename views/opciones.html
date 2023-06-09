@@ -1,0 +1,92 @@
+
+<div class="table-responsive">
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <td>
+                    Acciones
+                </td>
+                <td>
+                    Ejecutar
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <i class="far fa-shekel-sign"></i> Devolución de Mercancía
+                </td>
+                <td>
+                    <button class="btn btn-outline-danger btn-block" id="devolucion">
+                        <i class="fas fa-check-circle"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i class="fal fa-sack"></i> Retiro de dinero
+                </td>
+                <td>
+                    <button class="btn btn-outline-danger btn-block" id="retirar">
+                        <i class="fas fa-check-circle"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i class="fal fa-hand-holding-usd"></i> Ingreso de dinero
+                </td>
+                <td>
+                    <button class="btn btn-outline-danger btn-block" id="ingresar">
+                        <i class="fas fa-check-circle"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i class="fal fa-print"></i> Re-imprimir ticket
+                </td>
+                <td>
+                    <button class="btn btn-outline-danger btn-block" id="ticket">
+                        <i class="fas fa-check-circle"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i class="fal fa-calculator-alt"></i> Hacer corte del día
+                </td>
+                <td>
+                    <button class="btn btn-outline-danger btn-block" id="cortedia">
+                        <i class="fas fa-check-circle"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready( ( ) => {
+        $('#devolucion').on('click', ( ) => {
+            $('#contenido').load('views/componentesvta/devolucion.html');
+            $('#ventana').modal('toggle');
+        });
+
+        $('#ticket').on('click', ( ) => {
+            $('#mensaje').load('views/componentesvta/reimpresion.html');
+        });
+
+        $('#retirar').on('click', ( ) => {
+            $('#mensaje').load('views/componentesvta/retirodinero.html');
+        });
+
+        $('#ingresar').on('click', ( ) => {
+            $('#mensaje').load('views/componentesvta/ingresardinero.html');
+        });
+
+        $('#cortedia').on('click', ( ) => {
+            $('#mensaje').load('views/componentesvta/cortedia.html');
+        });
+    });
+</script>
