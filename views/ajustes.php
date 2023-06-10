@@ -11,12 +11,18 @@
             </h1>
             <hr>
             <div class="form-group">
-                <label for="codigo">Codigo de barras</label>
-                <input type="text" id="codigo" class="form-control">
+                <label for="articulo">Codigo de barras</label>
+                <input 
+                    type="text" 
+                    id="articulo" 
+                    class="form-control"
+                    onkeypress=" validar_tecla_compra ( event )"
+                    onkeyup=" validar_tecla_compra ( event )"
+                >
             </div>
             <div class="form-group">
-                <label for="desc">Descripcion del producto</label>
-                <input type="text" id="desc" class="form-control" disabled>
+                <label for="descrip">Descripcion del producto</label>
+                <input type="text" id="descrip" class="form-control" disabled>
             </div>
             <div class="form-group">
                 <label for="exist">Existencia del producto</label>
@@ -26,7 +32,14 @@
                 <label for="ajuste">Ajuste (+/-)</label>
                 <input type="text" id="ajuste" class="form-control">
             </div>
-            <button class="btn btn-outline-danger btn-block my-3">
+            <br>
+            <div class="alert alert-danger" role="alert" id="error" style="display: none;">
+                    
+            </div>
+            <button 
+                class="btn btn-outline-danger btn-block my-3"
+                onclick="save_adjustment( );"
+            >
                 <i class="fas fa-plus-circle"></i> Guardar ajuste
             </button>
         </div>
@@ -38,3 +51,10 @@
 
 
 ?>
+
+
+<script>
+    $(document).ready( ( ) => {
+        $('#articulo').focus( );
+    });
+</script>

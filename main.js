@@ -266,7 +266,6 @@ const buscar_producto = ( control ) => {
 
 
 const buscar_producto_2 = ( articulo ) => {
-    // let articulo = $('#articulo').val();
     if (articulo != '') {
         $.ajax({
             type: 'POST',
@@ -279,10 +278,14 @@ const buscar_producto_2 = ( articulo ) => {
                     $('#articulo').val('');
                     $('#articulo').focus();
                 }else {
+                    
                     $('#articulo').val(res.cod);
                     $('#descrip').html(res.desc);
+                    $('#descrip').val(res.desc);
                     $('#price').val(res.costo);
+                    $('#exist').val(res.existencia);
                     $('#count').val('1');
+                    $('#ajuste').focus();
                     $('#count').select();
                     $('#count').focus();
                 }
@@ -1936,15 +1939,14 @@ const cantidades = ( ) => {
 
 const enviarcorte = ( ) => {
     const imprimir_corte = new Promise ( ( resolve, reject )  => {
-        let sucursal = localStorage.getItem('sucursal');
         let usuario = localStorage.getItem('usuario');
         let contado = localStorage.getItem('totalarq');
 
-        let printdata = "sucursal=" + sucursal + '&usuario=' + usuario + '&contado=' + contado;
+        let printdata = 'usuario=' + usuario + '&contado=' + contado;
         let ventana;
 
         $.get('tickets/ticketcorte.php', printdata, ( ) =>{
-                ventana = window.open("tickets/ticketcorte.php?sucursal=" + sucursal + '&usuario=' + usuario + '&contado=' + contado); 7
+                ventana = window.open("tickets/ticketcorte.php?usuario=" + usuario + '&contado=' + contado); 
                 ventana.addEventListener('load' , () => {
                     resolve();
                 });
@@ -1956,14 +1958,13 @@ const enviarcorte = ( ) => {
 
     imprimir_corte
             .then(() => {
-                let sucursal = localStorage.getItem('sucursal');
+                // let sucursal = localStorage.getItem('sucursal');
                 let usuario = localStorage.getItem('usuario');
                 let dinero = localStorage.getItem('totalarq');
                 $.ajax({
                     type: 'POST',
                     url: 'php/cerrar_corte.php',
-                    data: 'sucursal=' + sucursal 
-                                + '&usuario=' + usuario + '&dinero=' + dinero,
+                    data: 'usuario=' + usuario + '&dinero=' + dinero,
                     success:( ) => {
 
                     }
@@ -2505,7 +2506,33 @@ const guardar_recibo = ( ) =>  {
 /* Bloque de funciones de nuevo recibo */
 
  
-
+/* Bloque de funciones de ajustes */
+const save_adjustment = ( ) => {
+    let cod = $('#articulo').val();
+    let ajuste = $('#ajuste').val();
+    let idu = localStorage.getItem('idu');
+    if (ajuste != '' && cod != '' && descrip != '') {
+        $.ajax({
+            type: 'POST',
+            url: 'php/regadjustment.php',
+            data: 'cod=' + cod + '&ajuste=' + ajuste + '&idu=' + idu,
+            success: ( res ) => {
+                if ( res == 1 ) {
+                    mensajes('Ajuste realizado con éxito');
+                    $('#cod').val('');
+                    $('#descrip').val('');
+                    $('#ajuste').val('');
+                    $('#exist').val('');
+                }else {
+                    mostrar_error( res );
+                }
+            }
+        })
+    }else {
+        mostrar_error('Debes llenar todos los campos antes de continuar');
+    }
+}
+/* Bloque de funciones de ajustes */
 
 
  

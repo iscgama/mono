@@ -16,26 +16,32 @@
     $anterior = $_POST['anterior'];
 
 
+    if ( $saldo == '' ) {
+        $saldo = 0;
+    }
 
     if ($operacion == 0) {
-        $sql = "INSERT INTO `proveedor`(`id_pr`, `nom_pr`, `repr_pr`, `dir_pr`, `tel_pr`, 
-                                        `pob_pr`, `est_pr`, `col_pr`, `saldo_pr`) 
-			    VALUES (null, :razon, :nombre, :direccion, :telefono, :poblacion,
-                             :estado, :colonia, :saldo);";
+
+
+
+        $sql = "INSERT INTO `proveedor`(`nom_pr`, `repr_pr`, `dir_pr`, `tel_pr`, 
+                                        `pob_pr`, `est_pr`, `col_pr`, `saldo_pr`)
+			    VALUES (:razon, :nombre, :direccion, :telefono, :poblacion,
+                             :estado, :colonia, :saldo )";
 
         
-        $statement = $con->prepare($sql);
-        $statement->bindParam(':razon', $razon);
-        $statement->bindParam(':nombre', $nombre);
-        $statement->bindParam(':direccion', $direccion);
-        $statement->bindParam(':telefono', $telefono);
-        $statement->bindParam(':poblacion', $poblacion);
-        $statement->bindParam(':estado', $estado);
-        $statement->bindParam(':colonia', $colonia);
-        $statement->bindParam(':saldo', $saldo);
+        $stm = $con->prepare($sql);
+        $stm->bindParam(':razon', $razon);
+        $stm->bindParam(':nombre', $nombre);
+        $stm->bindParam(':direccion', $direccion);
+        $stm->bindParam(':telefono', $telefono);
+        $stm->bindParam(':poblacion', $poblacion);
+        $stm->bindParam(':estado', $estado);
+        $stm->bindParam(':colonia', $colonia);
+        $stm->bindParam(':saldo', $saldo);
 
 
-        $statement->execute();
+        $stm->execute();
         
     }else {
 

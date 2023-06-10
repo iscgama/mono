@@ -1,7 +1,7 @@
 <?php
 	include "fpdf/fpdf.php";
 
-    $sucursal = $_GET['sucursal'];
+    // $sucursal = $_GET['sucursal'];
     $usuario = $_GET['usuario'];
 	$contado = $_GET['contado'];
     
@@ -54,28 +54,28 @@
 
 
     //Obtenemos los datos de la sucursal de la que haremos corte
-    $sql = "SELECT `nom_s`, `dir_s`, `tel_s`, `cp_s`, 
-                    `ciudad_s`, `estado_s` FROM sucursales WHERE id_s = " . $sucursal;
-    $res = $con->query($sql);
-    $res->execute();
+    // $sql = "SELECT `nom_s`, `dir_s`, `tel_s`, `cp_s`, 
+    //                 `ciudad_s`, `estado_s` FROM sucursales WHERE id_s = " . $sucursal;
+    // $res = $con->query($sql);
+    // $res->execute();
 
-    $id_s = '';
-    $nom_s = '';
-    $dir_s = '';
-    $tel_s = '';
-    $cp_s = '';
-    $ciudad_s = '';
-    $estado_s = '';
+    // $id_s = '';
+    // $nom_s = '';
+    // $dir_s = '';
+    // $tel_s = '';
+    // $cp_s = '';
+    // $ciudad_s = '';
+    // $estado_s = '';
 
 
-    foreach ($res as $a) {
-        $nom_s = $a['nom_s'];
-        $dir_s = $a['dir_s'];
-        $tel_s = $a['tel_s'];
-        $cp_s = $a['cp_s'];
-        $ciudad_s = $a['ciudad_s'];
-        $estado_s = $a['estado_s'];
-    }
+    // foreach ($res as $a) {
+    //     $nom_s = $a['nom_s'];
+    //     $dir_s = $a['dir_s'];
+    //     $tel_s = $a['tel_s'];
+    //     $cp_s = $a['cp_s'];
+    //     $ciudad_s = $a['ciudad_s'];
+    //     $estado_s = $a['estado_s'];
+    // }
 
 
     //Obtenermos total de ventas en efectivo realizadas
@@ -83,8 +83,7 @@
 
     $sql = "SELECT SUM(monto_v) As Efectivo 
                 FROM ventas WHERE status_v = 1 
-                AND corte_v = 0 AND forma_v='Efectivo'
-                AND id_s = " . $sucursal;
+                AND corte_v = 0 AND forma_v='Efectivo'";
     $res = $con->query($sql);
     $res->execute();
 
@@ -99,8 +98,7 @@
 
     $sql = "SELECT SUM(monto_v) As Tarjeta 
                 FROM ventas WHERE status_v = 1 
-                AND corte_v = 0 AND forma_v='Tarjeta'
-                AND id_s = " . $sucursal;
+                AND corte_v = 0 AND forma_v='Tarjeta'";
     $res = $con->query($sql);
     $res->execute();
 
@@ -115,8 +113,7 @@
 
     $sql = "SELECT SUM(monto_v) As Credito 
                 FROM ventas WHERE status_v = 1 AND corte_v = 0 
-                AND forma_v='Credito'
-                AND id_s = " . $sucursal;
+                AND forma_v='Credito'";
     $res = $con->query($sql);
     $res->execute();
 
@@ -130,8 +127,7 @@
      $ingresos = 0;
 
      $sql = "SELECT SUM(monto_f) As Ingresos 
-                 FROM flujos WHERE corte_f = 0 AND tipo_f = 'I'
-                 AND id_s = " . $sucursal;
+                 FROM flujos WHERE corte_f = 0 AND tipo_f = 'I'";
      $res = $con->query($sql);
      $res->execute();
  
@@ -145,8 +141,7 @@
      $egresos = 0;
 
      $sql = "SELECT SUM(monto_f) As Egresos 
-                 FROM flujos WHERE corte_f = 0 AND tipo_f = 'E'
-                 AND id_s = " . $sucursal;
+                 FROM flujos WHERE corte_f = 0 AND tipo_f = 'E'";
      $res = $con->query($sql);
      $res->execute();
  

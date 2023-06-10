@@ -19,6 +19,7 @@
         $sql = "SELECT id_pr, nom_pr, repr_pr, dir_pr, 
                     tel_pr, pob_pr, est_pr, col_pr, saldo_pr 
                 FROM proveedor WHERE id_pr = " . $id;
+                
         $res = $con->query($sql);
         $res->execute();
 
@@ -92,7 +93,7 @@
         $salida .= '<button 
                         class="btn btn-outline-danger btn-block" 
                         id="gcte"
-                        onclick="guardar_datos_pr( );"
+                        onclick="guardar_datos_pr( 0, 0 );"
                     >
                         <i class="fas fa-hdd"></i> Guardar datos
                     </button>';

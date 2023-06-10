@@ -2,8 +2,6 @@
 
     require_once 'conexion.php';
 
-
-    $sucursal = $_POST['sucursal'];
     $usuario = $_POST['usuario'];
     $dinero = $_POST['dinero'];
 
@@ -29,31 +27,60 @@
      $res->execute();
 
 
-    //Obtenemos los datos de la sucursal de la que haremos corte
-    $sql = "SELECT `id_s`, `nom_s`, `dir_s`, `tel_s`, `cp_s`, 
-                    `ciudad_s`, `estado_s` FROM sucursales WHERE id_s = " . $sucursal;
+    // //Obtenemos los datos de la sucursal de la que haremos corte
+    // $sql = "SELECT `id_s`, `nom_s`, `dir_s`, `tel_s`, `cp_s`, 
+    //                 `ciudad_s`, `estado_s` FROM sucursales WHERE id_s = " . $sucursal;
     
 
-    $res = $con->query($sql);
-    $res->execute();
+    // $res = $con->query($sql);
+    // $res->execute();
 
-    $id_s = '';
-    $nom_s = '';
-    $dir_s = '';
-    $tel_s = '';
-    $cp_s = '';
-    $ciudad_s = '';
-    $estado_s = '';
+    // $id_s = '';
+    // $nom_s = '';
+    // $dir_s = '';
+    // $tel_s = '';
+    // $cp_s = '';
+    // $ciudad_s = '';
+    // $estado_s = '';
 
 
-    foreach ($res as $a) {
-        $id_s = $a['id_s'];
-        $nom_s = $a['nom_s'];
-        $dir_s = $a['dir_s'];
-        $tel_s = $a['tel_s'];
-        $cp_s = $a['cp_s'];
-        $ciudad_s = $a['ciudad_s'];
-        $estado_s = $a['estado_s'];
+    // foreach ($res as $a) {
+    //     $id_s = $a['id_s'];
+    //     $nom_s = $a['nom_s'];
+    //     $dir_s = $a['dir_s'];
+    //     $tel_s = $a['tel_s'];
+    //     $cp_s = $a['cp_s'];
+    //     $ciudad_s = $a['ciudad_s'];
+    //     $estado_s = $a['estado_s'];
+    // }
+
+    //Obtenemos todos los datos de la empresa
+	$sql = "SELECT nom_emp, dir_emp, tel_emp, cp_emp, ciudad_emp, estado_emp 
+            FROM datos_emp 
+            WHERE id_emp = 1";
+
+
+
+
+    $resultado = $con->query($sql);
+    $resultado->execute();
+
+    $nom_emp = '';
+    $dir_emp = '';
+    $tel_emp = '';
+    $cp_emp = '';
+    $ciudad_emp = '';
+    $estado_emp = '';
+
+
+
+    foreach ($resultado as $fila) {	
+    $nom_emp = $fila['nom_emp'];
+    $dir_emp = $fila['dir_emp'];
+    $tel_emp = $fila['tel_emp'];
+    $cp_emp = $fila['cp_emp'];
+    $ciudad_emp = $fila['ciudad_emp'];
+    $estado_emp = $fila['estado_emp'];
     }
 
 
@@ -62,8 +89,7 @@
 
     $sql = "SELECT SUM(monto_v) As Efectivo 
                 FROM ventas WHERE status_v = 1 AND corte_v = 0 
-                AND forma_v='Efectivo'
-                AND id_s = " . $sucursal;
+                AND forma_v='Efectivo'";
     $res = $con->query($sql);
     $res->execute();
 
@@ -78,8 +104,7 @@
 
     $sql = "SELECT SUM(monto_v) As Tarjeta 
                 FROM ventas WHERE status_v = 1 AND corte_v = 0 
-                AND forma_v='Tarjeta'
-                AND id_s = " . $sucursal;
+                AND forma_v='Tarjeta'";
     $res = $con->query($sql);
     $res->execute();
 
@@ -94,8 +119,7 @@
 
     $sql = "SELECT SUM(monto_v) As Credito 
                 FROM ventas WHERE status_v = 1 AND corte_v = 0 
-                AND forma_v='Credito'
-                AND id_s = " . $sucursal;
+                AND forma_v='Credito'";
     $res = $con->query($sql);
     $res->execute();
 
@@ -110,8 +134,7 @@
 
      $sql = "SELECT SUM(monto_f) As Ingresos 
                  FROM flujos WHERE corte_f = 0 
-                 AND tipo_f = 'I'
-                 AND id_s = " . $sucursal;
+                 AND tipo_f = 'I'";
      $res = $con->query($sql);
      $res->execute();
  
@@ -126,8 +149,7 @@
 
      $sql = "SELECT SUM(monto_f) As Egresos 
                  FROM flujos WHERE corte_f = 0 
-                 AND tipo_f = 'E'
-                 AND id_s = " . $sucursal;
+                 AND tipo_f = 'E'";
      $res = $con->query($sql);
      $res->execute();
  
@@ -150,7 +172,6 @@
     $salida = '
                 <center>
                     CORTE #: ' . $consecutivo . ' <br>
-                    <b>Sucursal:</b> ' . $nom_s . ' <br>
                     <b>Usuario:</b> ' . $usuario . ' <br>
                     <b>Fecha/Hora:</b> ' . date('d-m-Y') . ' / ' . date('H:m:i') . ' <br>
                     ------------------------------------------ <br>
@@ -263,12 +284,12 @@
     
 
     //Cerramos todas las ventas del corte
-    $sql = "UPDATE ventas SET corte_v = 1 WHERE corte_v = 0 AND id_s = " . $sucursal;
+    $sql = "UPDATE ventas SET corte_v = 1 WHERE corte_v = 0";
     $res = $con->query($sql);
     $res->execute();
 
     //Cerramos todas los flujos de caja
-    $sql = "UPDATE flujos SET corte_f = 1 WHERE corte_f = 0 AND id_s = " . $sucursal;
+    $sql = "UPDATE flujos SET corte_f = 1 WHERE corte_f = 0";
     $res = $con->query($sql);
     $res->execute();
 
