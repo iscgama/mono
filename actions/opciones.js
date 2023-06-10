@@ -1,6 +1,12 @@
 $(document).ready(function () {
     //$('#mvender').addClass('active');
 
+    $('#minventariog').on('click', function() {
+        localStorage.setItem("valor", 10);
+        validar();
+        $('#contenido').load('views/rinventario.php');
+    });
+
     $('#mventas').on('click', function() {
         localStorage.setItem("valor", 10);
         validar();
