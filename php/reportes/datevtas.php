@@ -4,7 +4,7 @@
 
     $fechai = $_POST['fechai'];
     $fechaf = $_POST['fechaf'];
-    $sucursal = $_POST['sucursal'];
+    // $sucursal = $_POST['sucursal'];
 
     $totalvtas = 0;
 
@@ -28,8 +28,7 @@
     $sql = "SELECT DISTINCT(vp.id_a) FROM ventas2 vp 
                 INNER JOIN ventas v ON vp.id_v = v.ventan_v
                 INNER JOIN articulos a ON vp.id_a = a.id_a 
-                WHERE v.id_s = " . $sucursal 
-                    . " AND v.fecha_v BETWEEN '" . $fechai . "' AND '" . $fechaf . "' AND v.status_v = 1";
+                WHERE v.fecha_v BETWEEN '" . $fechai . "' AND '" . $fechaf . "' AND v.status_v = 1";
     
 
     $res = $con->query($sql);
@@ -52,8 +51,7 @@
         $sql2 = "SELECT SUM(vp.cant_v) As Cantidad, vp.precio_v, 
                     DATE_FORMAT(v.fecha_v, '%d-%m-%Y') As fecha_v FROM ventas2 vp 
                     INNER JOIN ventas v ON vp.id_v = v.ventan_v
-                    WHERE vp.id_a = " . $a['id_a'] . " AND v.id_s = " . $sucursal
-                    . " AND v.fecha_v BETWEEN '" . $fechai . "' AND '" . $fechaf . "' AND status_v ";
+                    WHERE vp.id_a = " . $a['id_a'] . " AND v.fecha_v BETWEEN '" . $fechai . "' AND '" . $fechaf . "' AND status_v ";
 
         
         $res2 = $con->query($sql2);

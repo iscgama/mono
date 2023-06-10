@@ -14,7 +14,7 @@
         $sql = "SELECT desc_r, marcas_r, clasif_r, sucurs_r, clientes_r, cobranza_r,
                         entradas_r, salidas_r, compras_r, ajustes_r,
                         traspasos_r, ventas_r, usuarios_r, roles_r, prods_r, 
-                        permisos_r, cajeros_r, cajas_r, datos_r, provedor_r
+                        permisos_r, cajeros_r, cajas_r, datos_r, provedor_r, reportes_r
                     FROM roles
                     WHERE id_r = " . $tipo;
 
@@ -42,6 +42,7 @@
         $datos_r = 0;
         $cajas_r = 0;
         $provedor_r = 0;
+        $reportes_r = 0;
 
 
             foreach ($res as $a) {
@@ -65,6 +66,7 @@
                 $datos_r = $a['datos_r'];
                 $cajas_r = $a['cajas_r'];
                 $provedor_r = $a['provedor_r'];
+                $reportes_r = $a['reportes_r'];
                 $datos_r = $a['datos_r'];
             }
 
@@ -93,6 +95,7 @@
             $datos_r = 1;
             $cajas_r = 1;
             $provedor_r = 1;
+            $reportes_r = 1;
             $datos_r = 1;
             $sucursal = 'Matriz';
         }
@@ -212,6 +215,21 @@
     $salida .= '</div>
             </li>
             ';
+
+    if ( $reportes_r == 1 ) {
+        $salida .= "            
+            <li class='nav-item dropdown'>
+                <a class='nav-link dropdown-toggle' id='mreportes' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                    <i class='fas fa-chart-pie-alt'></i> Reportes
+                </a>
+                <div class='dropdown-menu' aria-labelledby='mseguridad'>
+                    <a class='dropdown-item' id='mventas'><i class='fad fa-chart-pie-alt'></i> Ventas del período</a>
+                    <a class='dropdown-item' id='minventariog'><i class='fas fa-signal-alt'></i> Existencias generales</a>
+                    <div class='dropdown-divider'></div>
+                </div>
+            </li>
+            ";
+    }
     
      
 

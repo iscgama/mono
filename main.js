@@ -80,6 +80,9 @@ const validar = ( ) => {
         case 9:
             $('#mcomprasuc').addClass('active');
             break;
+        case 10:
+            $('#mreportes').addClass('active');
+            break;
 	}
 }
 
@@ -2534,7 +2537,21 @@ const save_adjustment = ( ) => {
 }
 /* Bloque de funciones de ajustes */
 
+/* Bloque de funciones de reportes */
+const ventasXFecha = ( ) => {
+    let fecha1 = $('#fechai').val();
+    let fecha2 = $('#fechaf').val();
 
+    $.ajax({
+        type: 'POST',
+        url: 'php/reportes/datevtas.php',
+        data: 'fechai=' + fecha1 + '&fechaf=' + fecha2,
+        success: ( res ) => {
+            $('#reporte').html( res );
+        }
+    })
+}
+/* Bloque de funciones de reportes */
  
   
 
