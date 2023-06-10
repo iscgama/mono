@@ -55,6 +55,7 @@
 
 <script>
     $(document).ready( ( ) => {
+        localStorage.setItem('pantalla', 'compras');
         $('#articulo').focus( );
     });
 </script>
