@@ -1326,6 +1326,19 @@ const reimprimir_ticket = ( ) => {
 /* Fin de bloque de funciones de reimprimir */
 
 /* Bloque de funciones de cobranza */
+
+const list_moves = ( id ) => {
+    $.ajax({
+        type: 'POST',
+        url: 'php/querymoves.php',
+        data: 'id=' + id,
+        success: ( res ) => {
+            $('#mensaje').html( res );
+            $('#ventana').modal('toggle');
+        }
+    })
+}
+
 const abonar_cuenta = ( id, cliente, saldo ) => {
     localStorage.setItem('cobranzaid' , id);
     $.ajax({

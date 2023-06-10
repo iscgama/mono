@@ -69,6 +69,7 @@
                     <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
                         <a class='dropdown-item' id='" . $a['id_v'] . "' onclick='imprimir_formato(this.id, \"\")'><i class='far fa-eye'></i> Visualizar venta</a>
                         <a class='dropdown-item' id='" . $a['id_cb'] . "' onclick='abonar_cuenta(this.id, " . $idc . ", " .  $a['saldo_cb'] . ")'><i class='fal fa-wallet'></i> Abonar a esta cuenta</a>
+                        <a class='dropdown-item' id='" . $a['id_cb'] . "' onclick='list_moves( this.id )'><i class='far fa-clipboard-list'></i> Consultar abonos</a>
                     </div> 
                 </td>
             ";

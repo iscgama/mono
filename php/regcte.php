@@ -17,18 +17,9 @@
 
 
 
-
-    // echo '$operacion= ' . $operacion;
-    // echo '$nombre= ' . $nombre;
-    // echo '$direccion= ' . $direccion;
-    // echo '$telefono= ' . $telefono;
-    // echo '$poblacion= ' . $poblacion;
-    // echo '$estado= ' . $estado;
-    // echo '$lista= ' . $lista;
-    // echo '$clasifica= ' . $clasifica;
-    // echo '$limite= ' . $limite;
-    // echo '$idu= ' . $idu;
-    // echo '$anterior= ' . $anterior;
+    if ( $limite == '' ) {
+        $limite = 0;
+    }
     
         
     //Consultamos el ID de la clasificacion del producto
