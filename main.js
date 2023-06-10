@@ -435,15 +435,15 @@ const muestra_lista_prods = ( ) => {
     });
 }
 
-const introducir_codigo = ( { keyCode } ) => {
+const introducir_codigo = ( e ) => {
     let venta = localStorage.getItem('venta');
-        if (keyCode == 13) {
+        if (e.keyCode == 13) {
             producto_listar($('#codigov').val());
         }
         /*
             Este código permite aumentar la cantidad de producto del último renglón
         */
-        if (keyCode == 43) {
+        if (e.keyCode == 43) {
             let modo = 1;
             e.preventDefault();
             $.ajax({
@@ -459,7 +459,7 @@ const introducir_codigo = ( { keyCode } ) => {
          /*
             Este código permite disminuir la cantidad de producto del último renglón
         */
-            if (keyCode == 45) {
+            if (e.keyCode == 45) {
                 let modo = 0;
                 e.preventDefault();
                 $.ajax({
@@ -473,7 +473,7 @@ const introducir_codigo = ( { keyCode } ) => {
             }
 
         // Este código te permite borrar el último renglón
-        if ( keyCode == 46 ) {
+        if ( e.keyCode == 46 ) {
             let venta = localStorage.getItem('venta');
             $.ajax({
                 type: 'POST',
@@ -489,7 +489,7 @@ const introducir_codigo = ( { keyCode } ) => {
 
 
         // Este codigo busca un producto cuando se presiona una tecla abajo para buscar producto
-        if ( keyCode == 40 ) {
+        if ( e.keyCode == 40 ) {
             muestra_lista_prods();
         }
 }
