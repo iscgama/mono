@@ -16,6 +16,19 @@
     $anterior = $_POST['anterior'];
 
 
+
+
+    // echo '$operacion= ' . $operacion;
+    // echo '$nombre= ' . $nombre;
+    // echo '$direccion= ' . $direccion;
+    // echo '$telefono= ' . $telefono;
+    // echo '$poblacion= ' . $poblacion;
+    // echo '$estado= ' . $estado;
+    // echo '$lista= ' . $lista;
+    // echo '$clasifica= ' . $clasifica;
+    // echo '$limite= ' . $limite;
+    // echo '$idu= ' . $idu;
+    // echo '$anterior= ' . $anterior;
     
         
     //Consultamos el ID de la clasificacion del producto
@@ -24,17 +37,19 @@
     $res->execute();
 
 
-    $idc = '';
+    $idc = 0;
 
-    foreach ($res as $a) {
-        $idc = $a['id_ctc'];
+    if ($res->rowCount() > 0) {
+        foreach ($res as $a) {
+            $idc = $a['id_ctc'];
+        }
     }
     
 
     if ($operacion == 0) {
-        $sql = "INSERT INTO `clientes`(`id_ct`, `nom_ct`, `dir_ct`, `tel_ct`, `pob_ct`,
-                                     `est_ct`, `saldo_ct`, `lprecio_ct`, `id_ctc`, `limite_ct`) 
-			    VALUES (null, :nombre, :direccion, :telefono, :poblacion, :estado,
+        $sql = "INSERT INTO `clientes`(`nom_ct`, `dir_ct`, `tel_ct`, `pob_ct`, 
+                                        `est_ct`, `saldo_ct`, `lprecio_ct`, `id_ctc`, `limite_ct`) 
+			    VALUES (:nombre, :direccion, :telefono, :poblacion, :estado,
                         0.00, :lista, :clasifica, :limite);";
 
         
@@ -50,6 +65,7 @@
 
 
         $statement->execute();
+
         
     }else {
 

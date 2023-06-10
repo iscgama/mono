@@ -92,7 +92,6 @@ const focus_Next = ( event, Next ) => {
 const cargar_menu = ( ) => {
     let usuario = localStorage.getItem('usuario');
     let tipo = localStorage.getItem('tipo');
-    let sucursal = localStorage.getItem('sucursal');
     usuario = usuario.toLowerCase();
     document.title = "SoftPoint v 1.2 - " + ' User: ' + usuario;
 
@@ -101,8 +100,7 @@ const cargar_menu = ( ) => {
         $.ajax({
             type: 'POST',
             url: 'views/menu.php',
-            data: 'usuario=' + usuario + '&tipo=' + tipo
-                  + '&sucursal=' + sucursal,
+            data: 'usuario=' + usuario + '&tipo=' + tipo,
             success:( res ) => {
                 $('#barra').html(res);
                 $('#mvender').addClass('active');
@@ -1603,7 +1601,7 @@ const guardar_empresa = ( ) => {
 
 /* Bloque de funciones de reportes */
 const reporte = ( ) => {
-	var socio = $('#socio').val();
+	let socio = $('#socio').val();
 	if(socio == '') {
 		mensajes('Debes seleccionar al menos un socio para generar su reporte');
 	}else {
@@ -1943,7 +1941,7 @@ const enviarcorte = ( ) => {
         let contado = localStorage.getItem('totalarq');
 
         let printdata = "sucursal=" + sucursal + '&usuario=' + usuario + '&contado=' + contado;
-        var ventana;
+        let ventana;
 
         $.get('tickets/ticketcorte.php', printdata, ( ) =>{
                 ventana = window.open("tickets/ticketcorte.php?sucursal=" + sucursal + '&usuario=' + usuario + '&contado=' + contado); 7
@@ -2225,137 +2223,6 @@ const cambiarprecio_sal = ( id, valor ) => {
 
 /* Bloque de funciones de nueva salida */
 
-/* Bloque de funciones de pedidos de compra */
-const eliminar_pedido = ( id ) => {
-    $.ajax({
-        type: 'POST',
-        url: 'php/eliminarpedido.php',
-        data: 'id=' + id,
-        success: ( res ) => {
-            if (res == 1) {
-                mensajes('Se desecho el pedido');
-                $('#contenido').load('views/pedidos.html');
-            }else {
-                mensajes(res);
-            }
-        }
-    });
-}
-
-const finalizar_pedido = ( id ) => {
-    $.ajax({
-        type: 'POST',
-        url: 'php/finalizarpedido.php',
-        data: 'id=' + id,
-        success: ( res ) => {
-            console.log(res);
-            if (res == 1) {
-                mensajes('Pedido guardado con éxito');
-                imprimir_formato(id, 'pedido');
-                $('#contenido').load('views/pedidos.html');
-            }else {
-                mostrar_error(res);
-            }
-        }
-    });
-}
-
-
-/* Bloque de funciones de pedidos de compra */
-
-/* Bloque de funciones de nuevo pedidos de compra */
-const eliminar_reng_ped = ( id ) => {
-    $.ajax({
-        type: 'POST',
-        url: 'php/eliminar_reng_ped.php',
-        data: 'id=' + id,
-        success: ( res ) => {
-            if (res != 0) {
-                detalle_pedido();
-            }
-        }
-    })
-}
-
-const agregar_renglon_pedido = ( ) => {
-    let code = $('#articulo').val();
-    let count = $('#count').val();
-    let price = $('#price').val();
-    let numpedido = $('#pedido').val();
-    let idu = localStorage.getItem('idu');
-    //let sucursal = $('#sucursales').val();
-    let pr = $('#proveedores').val();
-    $('#proveedores').attr("disabled", "true");
-
-    if (code != '' && !isNaN(count) && !isNaN(price)) {
-        $.ajax({
-            type: 'POST',
-            url: 'php/agrega_reng_ped.php',
-            data: 'code=' + code + '&count=' + count + '&price=' + price
-                    + '&compra=' + numpedido + '&idu=' + idu  + '&pr=' + pr,
-            success: ( res ) => {
-                if (res == 0) {
-                    $('#descrip').html('Descripción');
-                    $('#articulo').val('');
-                    $('#count').val('');
-                    $('#price').val('');
-                    $('#articulo').focus();
-                    detalle_pedido();
-
-                }else {
-                    mensajes(res);
-                }
-            }
-        })
-    }else {
-        mensajes('Datos no válidos, debes introducir el código del producto, cantidad y precio');
-    }
-}
-
-const cambiarcant_pedido = ( id, valor ) => {
-    localStorage.setItem('cantidad', valor);
-    localStorage.setItem('renglon', id);
-    $('#mensaje').load('views/cambiar_cantped.html');
-    $('#ventana').modal('toggle');
-}
-
-const cambiarprecio_pedido =( id, valor ) => {
-    localStorage.setItem('precio', valor);
-    localStorage.setItem('renglon', id);
-    $('#mensaje').load('views/cambiar_ppedido.html');
-    $('#ventana').modal('toggle');
-}
-
-const obtener_consec_pedido = ( ) => {
-    $.ajax({
-        type: 'POST',
-        url: 'php/obtener_consec_pedido.php',
-        success:( res ) => {
-            $('#pedido').val(res);
-            localStorage.setItem('numpedido', res);
-            detalle_pedido(res);
-        }
-    });
-
-    $('#articulo').focus();
-}
-
-/*
-    Funcion que muestra el detalle de la entrada
-*/
-const detalle_pedido = ( ) => {
-    let num = $('#pedido').val();
-    $.ajax({
-        type: 'POST',
-        url: 'php/detallepedido.php', 
-        data: 'num=' + num,
-        success: ( res ) => {
-            $('#detallepedido').html(res);
-        }
-    });
-}
-
-/* Bloque de funciones de nuevo pedidos de compra */
 
 /* Bloque de funciones de transpaso a sucursal */
 const eliminar_traspaso_suc = ( id ) => {
@@ -2441,6 +2308,7 @@ const actualizar_cte = ( id ) => {
 }
 
 const guardar_datos = ( operacion, id) => {
+    
     let nombre = $('#nombre').val();
     let direccion = $('#direccion').val();
     let telefono = $('#telefono').val();
@@ -2502,7 +2370,7 @@ const ingresar_dinero = ( ) => {
 /* Bloque de funciones de individual */
 const reporte_ind = ( ) => {
     $('#resultado').html('<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>');
-    var socio = $('#socio').val();
+    let socio = $('#socio').val();
     if (socio != '') {
         $.ajax({
             type: 'POST',

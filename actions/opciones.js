@@ -37,17 +37,17 @@ $(document).ready(function () {
         $('#contenido').load('views/proveedores.html');
     });
 
-    $('#msucursales').on('click', function() {
-        localStorage.setItem("valor", 1);
-        validar();
-        $('#contenido').load('views/sucursales.html');
-    });
+    // $('#msucursales').on('click', function() {
+    //     localStorage.setItem("valor", 1);
+    //     validar();
+    //     $('#contenido').load('views/sucursales.html');
+    // });
 
-    $('#mcajeros').on('click', function() {
-        localStorage.setItem("valor", 1);
-        validar();
-        $('#contenido').load('views/cajeros.html');
-    });
+    // $('#mcajeros').on('click', function() {
+    //     localStorage.setItem("valor", 1);
+    //     validar();
+    //     $('#contenido').load('views/cajeros.html');
+    // });
 
     $('#musers').on('click', function() {
         localStorage.setItem("valor", 3);
@@ -67,17 +67,19 @@ $(document).ready(function () {
         $('#contenido').load('views/salidas.html');
     });
 
-    $('#mpedidos').on('click', function() {
-        localStorage.setItem("valor", 2);
-        validar();
-        $('#contenido').load('views/pedidos.html');
-    });
+    
 
-    $('#mtraspasos').on('click', function() {
-        localStorage.setItem("valor", 2);
-        validar();
-        $('#contenido').load('views/traspasos.html');
-    });
+    // $('#mpedidos').on('click', function() {
+    //     localStorage.setItem("valor", 2);
+    //     validar();
+    //     $('#contenido').load('views/pedidos.html');
+    // });
+
+    // $('#mtraspasos').on('click', function() {
+    //     localStorage.setItem("valor", 2);
+    //     validar();
+    //     $('#contenido').load('views/traspasos.html');
+    // });
 
     $('#mtrassuc').on('click', function() {
         localStorage.setItem("valor", 2);
@@ -118,11 +120,11 @@ $(document).ready(function () {
 					});
     });
     
-    $('#mventas').on('click', function() {
-        localStorage.setItem("valor", 7);
-        validar();
-        $('#contenido').load('php/ventas.php');
-    });
+    // $('#mventas').on('click', function() {
+    //     localStorage.setItem("valor", 7);
+    //     validar();
+    //     $('#contenido').load('php/ventas.php');
+    // });
     
     $('#mrecibos').on('click', function() {
         localStorage.setItem("valor", 8);

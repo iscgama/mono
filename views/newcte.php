@@ -43,6 +43,10 @@
             $limite_ct = $a['limite_ct'];
         }
 
+
+        if ($limite_ct == '') {
+            $limite_ct = 0;
+        }
     }
 
     $sql = "SELECT desc_ctc FROM clasifcte";
