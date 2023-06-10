@@ -36,7 +36,12 @@ $(document).ready(function () {
         validar();
         $('#contenido').load('views/proveedores.html');
     });
-
+    
+    $('#majuste').on('click', function() {
+        localStorage.setItem("valor", 2);
+        validar();
+        $('#contenido').load('views/ajustes.php');
+    });
     // $('#msucursales').on('click', function() {
     //     localStorage.setItem("valor", 1);
     //     validar();

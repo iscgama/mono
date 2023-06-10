@@ -570,7 +570,7 @@ const aplicar_abono = ( ) => {
     let cliente = $('#cobcte').val();
 
     if (monto != '') {
-        if ( monto >= adeudo ) {
+        if ( adeudo >= monto ) {
             $.ajax({
                 type: 'POST',
                 url: 'php/aplicarabono.php',
@@ -828,7 +828,7 @@ const finalizar_venta = ( )  => {
                        type: 'POST',
                        url: 'php/finalizar_vta.php',
                        data: 'forma=' + forma + '&cambio=' + cambio + '&pago=' + pago
-                             + ' &venta=' + venta + '&sucursal=' + sucursal + '&idu=' + idu
+                             + ' &venta=' + venta + '&idu=' + idu
                              + '&cliente=' + cliente,
                         success:( res ) => {
                             if (res == 1) {

@@ -48,6 +48,7 @@
     if ($cont > 0) {
         echo 'El usuario que intentas actualizar ya existe';
     }else {
+        $pass = md5( $pass );
         $sql = "UPDATE usuarios SET name_u = '" . $nombre . "', user_u = '" . $usuario . "', pass_u = '" . $pass . "', id_r = " . $roles . " WHERE user_u = '" . $anterior . "'";
         $res = $con->query($sql);
         $res->execute();

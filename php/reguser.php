@@ -21,16 +21,6 @@
         $roles = $a['id_r'];
     }
 
-    // //Consultar ID de sucursal
-    // $sql = "SELECT id_s FROM sucursales WHERE nom_s = '" . $sucursales . "'";
-    // $res = $con->query($sql);
-    // $res->execute();
-
-    // foreach ($res as $a) {
-    //     $sucursales = $a['id_s'];
-    // }      
-
-
 
 
 
@@ -42,17 +32,14 @@
 
         $id = 0;
 
-        foreach ($res as $a) {
-            $id = $a['id_u'];
-        }
 
-        if ($id != 0) {
+        if ($res->rowCount() != 0) {
             echo 'Error al intentar registrar un usuario este ya existe intente con otro';
         }else {
 
             $pass = md5( $pass );
-            $sql = "INSERT INTO `usuarios`(`id_u`, `name_u`, `user_u`, `pass_u`, `id_r`)  
-                    VALUES (null, :nombre, :usuario, :pass, :roles,);";
+            $sql = "INSERT INTO `usuarios`(`name_u`, `user_u`, `pass_u`, `id_r`)  
+                    VALUES (:nombre, :usuario, :pass, :roles);";
     
             
             $statement = $con->prepare($sql);
@@ -72,10 +59,10 @@
             $res->execute();
 
 
-            $sql = "INSERT INTO `permisos`(`id_p`, `dev_p`, `cprecio_p`, `cargos_p`, `abonos_p`,
+            $sql = "INSERT INTO `permisos`(`dev_p`, `cprecio_p`, `cargos_p`, `abonos_p`,
                                          `quitara_p`, `corte_p`, `cajon_p`, `ccant_p`, `vender_p`,
                                           `cambiop_p`, `id_u`)  
-                    VALUES (null, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, " . $id . ");";
+                    VALUES (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, " . $id . ");";
             $res = $con->query($sql);
             $res->execute();  
         }

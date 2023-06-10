@@ -47,20 +47,7 @@
                         foreach ($res as $a) {
                             $salida .= '<option>' . $a['desc_r'] . '</option>';
                         }
-            $salida .= '</select>
-                </div>
-                <div class="form-group">
-                    <label for="sucursales">Sucursal donde trabaja</label>
-                    <select class="form-control" id="sucursales">';
-                    $sql = "SELECT nom_s FROM sucursales";
-
-                    $res = $con->query($sql);
-                    $res->execute();
-
-                    foreach ($res as $a) {
-                        $salida .= '<option>' . $a['nom_s'] . '</option>';
-                    }
-
+            
             $salida .= '
             </select>
                 </div>
