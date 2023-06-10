@@ -226,6 +226,7 @@
                     <a class='dropdown-item' id='mventas'><i class='fad fa-chart-pie-alt'></i> Ventas del período</a>
                     <a class='dropdown-item' id='minventariog'><i class='fas fa-signal-alt'></i> Existencias generales</a>
                     <div class='dropdown-divider'></div>
+                    <a class='dropdown-item' id='mmoresales'><i class='fas fa-signal-alt'></i> Grafica de ventas</a>
                 </div>
             </li>
             ";

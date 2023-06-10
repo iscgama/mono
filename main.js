@@ -2566,6 +2566,22 @@ const ventasXFecha = ( ) => {
 }
 /* Bloque de funciones de reportes */
  
+/* Bloque reporte gráfico de valores */
+const generate_report = ( ) => {
+    let fechai = $('#fechai').val( );
+    let fechaf = $('#fechaf').val( );
+
+    $.ajax({
+        type: 'POST',
+        url: 'php/reportresult.php',
+        data: 'fechai=' + fechai + '&fechaf=' + fechaf,
+        dataType: 'json',
+        success: ( res ) => {
+            console.log( res );
+        }
+    })
+}
+/* Bloque reporte gráfico de valores */
   
 
 $(document).ready(( ) => {

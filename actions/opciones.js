@@ -7,6 +7,12 @@ $(document).ready(function () {
         $('#contenido').load('views/rinventario.php');
     });
 
+    $('#mmoresales').on('click', function() {
+        localStorage.setItem("valor", 10);
+        validar();
+        $('#contenido').load('views/moresales.php');
+    });
+
     $('#mventas').on('click', function() {
         localStorage.setItem("valor", 10);
         validar();
