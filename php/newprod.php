@@ -2,6 +2,8 @@
 
     require_once 'conexion.php';
 
+   
+    
 
     function ID_clasificacion($clasif, $con) {
 
@@ -80,6 +82,7 @@
 
 
 
+
     $operacion = $_POST['operacion'];
     $ida = $_POST['ida'];
     $idu = $_POST['idu'];
@@ -104,6 +107,10 @@
 
     $nclasif = $_POST['nclasif'];
     $nmarca = $_POST['nmarca'];
+    
+
+
+    
 
     if ($nclasif != '') {
         $idc = ID_clasificacion($nclasif, $con);
@@ -136,40 +143,46 @@
         if ( $res->rowCount( ) > 0 ) {
             echo 'Ese producto ya existe con el codigo o descripción que deseas registrar';
         }else {
-            $sql = "INSERT INTO `articulos`(`id_a`, `cod_a`, `desc_a`, `costo_a`, `precio_a`, 
-                                            `egral_a`, `may1_a`, `cant1_a`, `may2_a`, `cant2_a`,
-                                            `may3_a`, `cant3_a`, `granel_a`, `inv_a`, `id_c`, 
-                                            `id_m`, `id_u`, `stock_min_a`, `stock_max_a`, `favorito_a`) 
-                    VALUES (null, :codigo, :descrip, :costo, :precio, :existencia,
-                            :may1, :cant1, :may2, :cant2, :may3, :cant3, :granel,
-                            :inventario, :idc, :idm, :idu, :stockmin, :stockmax, :favorito);";
+            $sql = "SELECT coda_b FROM codigos WHERE cod_b = '" . $codigo . "'";
+            $res = $con->query( $sql );
+            $res->execute( );
 
-            
-
-            $statement = $con->prepare($sql);
-            $statement->bindParam(':codigo', $codigo);
-            $statement->bindParam(':descrip', $desc);
-            $statement->bindParam(':costo', $costo);
-            $statement->bindParam(':precio', $precio);
-            $statement->bindParam(':existencia', $existencia);
-            $statement->bindParam(':may1', $may1);
-            $statement->bindParam(':cant1', $cant1);
-            $statement->bindParam(':may2', $may2);
-            $statement->bindParam(':cant2', $cant2);
-            $statement->bindParam(':may3', $may3);
-            $statement->bindParam(':cant3', $cant3);
-            $statement->bindParam(':granel', $granel);
-            $statement->bindParam(':inventario', $inventario);
-            $statement->bindParam(':idc', $idc);
-            $statement->bindParam(':idm', $idm);
-            $statement->bindParam(':idu', $idu);
-            $statement->bindParam(':stockmin', $smin);
-            $statement->bindParam(':stockmax', $smax);
-            $statement->bindParam(':favorito', $favorito);
-            $statement->bindParam(':stockmax', $smax);
+            if ($res->rowCount( ) > 0) {
+                echo 'El producto que intentas registrar ya existe intenta con otro código';
+            }else {
+                $sql = "INSERT INTO `articulos`( `cod_a`, `desc_a`, `costo_a`, `precio_a`, 
+                            `egral_a`, `may1_a`, `cant1_a`, `may2_a`, `cant2_a`,
+                            `may3_a`, `cant3_a`, `granel_a`, `inv_a`, `id_c`, 
+                            `id_m`, `id_u`, `stock_min_a`, `stock_max_a`, `favorito_a`) 
+                    VALUES (:codigo, :descrip, :costo, :precio, :existencia,
+                    :may1, :cant1, :may2, :cant2, :may3, :cant3, :granel,
+                    :inventario, :idc, :idm, :idu, :stockmin, :stockmax, :favorito);";
 
 
-            $statement->execute();
+
+                $stm = $con->prepare($sql);
+                $stm->bindParam(':codigo', $codigo);
+                $stm->bindParam(':descrip', $desc);
+                $stm->bindParam(':costo', $costo);
+                $stm->bindParam(':precio', $precio);
+                $stm->bindParam(':existencia', $existencia);
+                $stm->bindParam(':may1', $may1);
+                $stm->bindParam(':cant1', $cant1);
+                $stm->bindParam(':may2', $may2);
+                $stm->bindParam(':cant2', $cant2);
+                $stm->bindParam(':may3', $may3);
+                $stm->bindParam(':cant3', $cant3);
+                $stm->bindParam(':granel', $granel);
+                $stm->bindParam(':inventario', $inventario);
+                $stm->bindParam(':idc', $idc);
+                $stm->bindParam(':idm', $idm);
+                $stm->bindParam(':idu', $idu);
+                $stm->bindParam(':stockmin', $smin);
+                $stm->bindParam(':stockmax', $smax);
+                $stm->bindParam(':favorito', $favorito);
+
+                $stm->execute();
+            }
         }
     }else {
 
@@ -185,7 +198,8 @@
             $repetido++;
         }
 
-        if ($repetido > 0) {
+
+        if ( $res->rowCount( ) > 0 ) {
             echo 'El producto que intentas actualizar ya existe';
         }else {
             $sql = "UPDATE `articulos` SET `cod_a`= :codigo, `desc_a`= :descrip,
@@ -220,13 +234,10 @@
 
 
             $statement->execute();
-
         }
     }
 
 
     echo 1;
-    //echo '$ida= ' .  $ida . ' idc=' . $idc;
-
 
 ?>
