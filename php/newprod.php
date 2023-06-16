@@ -117,8 +117,6 @@
         $idm = ID_marca($marca, $con);
     }
 
-
-
     $may1 = ($may1 == null ? 0: $may1);
     $cant1 = ($cant1 == null ? 0: $cant1);
     $may2 = ($may2 == null ? 0: $may2);
@@ -128,24 +126,16 @@
     $smin = ($smin == null ? 0 : $smin);
     $smax = ($smax == null ? 0 : $smax);
 
-
     
-    
-    
-
     if ($operacion == 0) {
 
         $sql = "SELECT id_a FROM articulos WHERE cod_a = '" . $codigo . "'";
         $res = $con->query($sql);
         $res->execute();
 
-        $repetido = 0;
-
-        foreach ($res as $a) {
-            $repetido++;
-        }
-
-        if ($repetido == 0) {
+        if ( $res->rowCount( ) > 0 ) {
+            echo 'Ese producto ya existe con el codigo o descripción que deseas registrar';
+        }else {
             $sql = "INSERT INTO `articulos`(`id_a`, `cod_a`, `desc_a`, `costo_a`, `precio_a`, 
                                             `egral_a`, `may1_a`, `cant1_a`, `may2_a`, `cant2_a`,
                                             `may3_a`, `cant3_a`, `granel_a`, `inv_a`, `id_c`, 
@@ -180,9 +170,6 @@
 
 
             $statement->execute();
-
-        }else {
-            echo 'Ese producto ya existe con el codigo o descripción que deseas registrar';
         }
     }else {
 
